@@ -6,8 +6,5 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
     {
         public MyDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<TestTable> TestTables { get; set; }
-
-
     }
 }

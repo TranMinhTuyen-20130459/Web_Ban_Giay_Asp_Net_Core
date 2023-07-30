@@ -3,13 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
-    [Table("TestTables")]
-    public class TestTable
+    [Table("Sizes")]
+    public class Size
     {
         [Key]
-        public int id_test { get; set; }
-
-        public string name_test { get; set; }
-        
+        public string name_size { get; set; }
     }
 }
