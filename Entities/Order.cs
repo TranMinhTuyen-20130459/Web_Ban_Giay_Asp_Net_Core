@@ -58,7 +58,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         public string return_district_id { get; set; }
         public string return_province_id { get; set; }
 
-        public string email_customer { get; set; }
+        public string? email_customer { get; set; } // nếu có ? thì giá trị đó có thể null , nếu không có thì mặc định = ""
 
         [Required]
         public string to_name { get; set; }

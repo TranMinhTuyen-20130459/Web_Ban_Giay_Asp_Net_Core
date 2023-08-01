@@ -13,6 +13,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [Required]
         public string path { get; set; }
 
+        public long id_product { get; set; }
         public Product product { get; set; }
     }
 }

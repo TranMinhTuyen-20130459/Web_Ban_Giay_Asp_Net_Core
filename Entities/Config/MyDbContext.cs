@@ -91,6 +91,20 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
              .HasForeignKey(od => od.id_product)
              .OnDelete(DeleteBehavior.Cascade);
 
+            // Cấu hình khóa ngoại giữa HistoryPriceProduct và Product
+            modelBuilder.Entity<HistoryPriceProduct>()
+                .HasOne(hpp => hpp.product)                     // Khóa ngoại từ HistoryPriceProduct
+                .WithMany(product => product.list_price)                // Tham chiếu đến ICollection<HistoryPriceProduct> trong Product
+                .HasForeignKey(hpp => hpp.id_product)           // Khóa ngoại là id_product trong HistoryPriceProduct
+                .OnDelete(DeleteBehavior.Cascade);          // Xóa các lịch sử giá liên quan khi xóa sản phẩm
+
+            // Cấu hình khóa ngoại giữa ImageProduct và Product
+            modelBuilder.Entity<ImageProduct>()
+                .HasOne(imgProduct => imgProduct.product)
+                .WithMany(product => product.images)
+                .HasForeignKey(imgProduct => imgProduct.id_product)
+                .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

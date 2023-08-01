@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230731105143_TableInit")]
-    partial class TableInit
+    [Migration("20230801015538_update_table_order")]
+    partial class update_table_order
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,11 +75,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
+                    b.Property<long>("id_product")
+                        .HasColumnType("bigint");
+
                     b.Property<decimal>("listed_price")
                         .HasColumnType("decimal(65,30)");
-
-                    b.Property<long>("productid_product")
-                        .HasColumnType("bigint");
 
                     b.Property<decimal>("promotional_price")
                         .HasColumnType("decimal(65,30)");
@@ -92,7 +92,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
                     b.HasKey("id_price_product");
 
-                    b.HasIndex("productid_product");
+                    b.HasIndex("id_product");
 
                     b.ToTable("History_Price_Products");
                 });
@@ -103,16 +103,16 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<long>("id_product")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("path")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long>("productid_product")
-                        .HasColumnType("bigint");
-
                     b.HasKey("id_image");
 
-                    b.HasIndex("productid_product");
+                    b.HasIndex("id_product");
 
                     b.ToTable("Image_Products");
                 });
@@ -214,39 +214,30 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("return_address")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_phone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("ship_price")
@@ -448,7 +439,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
                         .WithMany("list_price")
-                        .HasForeignKey("productid_product")
+                        .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -459,7 +450,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
                         .WithMany("images")
-                        .HasForeignKey("productid_product")
+                        .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -11,6 +11,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long id_price_product { get; set; }
 
+        public long id_product { get; set; }
         public Product product { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "Listed price must be greater than or equal to 0.")]

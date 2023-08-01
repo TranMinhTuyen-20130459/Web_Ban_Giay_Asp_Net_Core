@@ -276,7 +276,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 {
                     id_price_product = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    productid_product = table.Column<long>(type: "bigint", nullable: false),
+                    id_product = table.Column<long>(type: "bigint", nullable: false),
                     listed_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     promotional_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     time_start = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -288,8 +288,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 {
                     table.PrimaryKey("PK_History_Price_Products", x => x.id_price_product);
                     table.ForeignKey(
-                        name: "FK_History_Price_Products_Products_productid_product",
-                        column: x => x.productid_product,
+                        name: "FK_History_Price_Products_Products_id_product",
+                        column: x => x.id_product,
                         principalTable: "Products",
                         principalColumn: "id_product",
                         onDelete: ReferentialAction.Cascade);
@@ -304,14 +304,14 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     path = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    productid_product = table.Column<long>(type: "bigint", nullable: false)
+                    id_product = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Image_Products", x => x.id_image);
                     table.ForeignKey(
-                        name: "FK_Image_Products_Products_productid_product",
-                        column: x => x.productid_product,
+                        name: "FK_Image_Products_Products_id_product",
+                        column: x => x.id_product,
                         principalTable: "Products",
                         principalColumn: "id_product",
                         onDelete: ReferentialAction.Cascade);
@@ -373,14 +373,14 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_History_Price_Products_productid_product",
+                name: "IX_History_Price_Products_id_product",
                 table: "History_Price_Products",
-                column: "productid_product");
+                column: "id_product");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_Products_productid_product",
+                name: "IX_Image_Products_id_product",
                 table: "Image_Products",
-                column: "productid_product");
+                column: "id_product");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_Details_id_product",
