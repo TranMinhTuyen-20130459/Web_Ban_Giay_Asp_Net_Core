@@ -55,8 +55,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("name_brand")
-                        .HasColumnType("int");
+                    b.Property<string>("name_brand")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("id_brand");
 

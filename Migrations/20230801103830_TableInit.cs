@@ -42,7 +42,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 {
                     id_brand = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name_brand = table.Column<int>(type: "int", nullable: false)
+                    name_brand = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -119,7 +120,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     return_province_id = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    email_customer = table.Column<string>(type: "longtext", nullable: false)
+                    email_customer = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     to_name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),

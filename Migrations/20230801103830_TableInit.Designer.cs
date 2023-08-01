@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230801015538_update_table_order")]
-    partial class update_table_order
+    [Migration("20230801103830_TableInit")]
+    partial class TableInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,8 +57,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("name_brand")
-                        .HasColumnType("int");
+                    b.Property<string>("name_brand")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("id_brand");
 
@@ -164,7 +165,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("email_customer")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_address")
@@ -214,30 +214,39 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("return_address")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_phone")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("ship_price")
