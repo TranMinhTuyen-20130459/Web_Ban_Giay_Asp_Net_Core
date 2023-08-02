@@ -5,6 +5,14 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
     public class MyDbContext : DbContext
     {
 
+        private readonly ILoggerFactory _loggerFactory;
+
+        public MyDbContext(DbContextOptions<MyDbContext> options, ILoggerFactory loggerFactory) : base(options)
+        {
+            _loggerFactory = loggerFactory;
+        }
+
+
         public DbSet<Admin> Admins { get; set; }
 
         public DbSet<Brand> Brands { get; set; }
@@ -32,13 +40,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
         public DbSet<SizeProduct> SizeProducts { get; set; }
 
         public DbSet<TypeProduct> TypeProducts { get; set; }
-
-        // dùng cho khi khởi tạo một MyDbContext tại console app 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

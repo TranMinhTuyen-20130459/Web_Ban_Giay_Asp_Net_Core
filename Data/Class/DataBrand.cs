@@ -1,4 +1,5 @@
-﻿using Web_Ban_Giay_Asp_Net_Core.Data.Interface;
+﻿using System.Diagnostics;
+using Web_Ban_Giay_Asp_Net_Core.Data.Interface;
 using Web_Ban_Giay_Asp_Net_Core.Entities;
 using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
@@ -11,6 +12,10 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 
         public void AddDataToTable(MyDbContext dbContext)
         {
+            // Khởi tạo Stopwatch
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             using (var transaction = dbContext.Database.BeginTransaction())
             {
                 try
@@ -31,6 +36,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                     Console.WriteLine(e.Message);
                 }
             }
+            // Dừng đồng hồ đo thời gian
+            stopwatch.Stop();
+
+            // Lấy thời gian thực thi và in ra màn hình
+            TimeSpan elapsedTime = stopwatch.Elapsed;
+            Console.WriteLine("Execute time: " + elapsedTime.TotalSeconds + " s");
         }
     }
 }
