@@ -20,9 +20,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [Range(0, double.MaxValue, ErrorMessage = "Promotional price must be greater than or equal to 0.")]
         public decimal promotional_price { get; set; }
 
-        public DateTime time_start { get; set; }
+        public DateTime? time_start { get; set; }
 
-        public DateTime time_end { get; set; }
+        public DateTime? time_end { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [DefaultValue("DateTime.Now")]
