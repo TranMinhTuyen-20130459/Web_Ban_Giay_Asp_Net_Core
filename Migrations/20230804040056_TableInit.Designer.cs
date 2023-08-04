@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230804025718_update_table_history_price_products")]
-    partial class update_table_history_price_products
+    [Migration("20230804040056_TableInit")]
+    partial class TableInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -20,7 +20,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                     foreach (var item in arr_size)
                     {
                         var size = new Size { name_size = item };
-                        dbContext.Add(size);
+                        dbContext.Sizes.Add(size);
                         dbContext.SaveChanges();
                     }
                     transaction.Commit();

@@ -23,7 +23,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                     foreach (var brandName in arr_brands)
                     {
                         var brand = new Brand { name_brand = brandName };
-                        dbContext.Add(brand);
+                        dbContext.Brands.Add(brand);
 
                     }
                     dbContext.SaveChanges();

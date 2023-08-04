@@ -38,7 +38,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                             price_start = value_price_range[0],
                             price_end = value_price_range[1]
                         };
-                        dbContext.Add(priceRange);
+                        dbContext.PriceRanges.Add(priceRange);
                     }
                     dbContext.SaveChanges();
                     transaction.Commit();

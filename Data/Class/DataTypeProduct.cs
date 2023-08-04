@@ -21,7 +21,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                     foreach (var item in arr_type_products)
                     {
                         var typeProduct = new TypeProduct { name_type = item };
-                        dbContext.Add(typeProduct);
+                        dbContext.TypeProducts.Add(typeProduct);
                     }
                     dbContext.SaveChanges();
                     transaction.Commit();

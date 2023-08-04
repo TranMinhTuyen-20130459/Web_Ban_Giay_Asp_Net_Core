@@ -280,8 +280,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     id_product = table.Column<long>(type: "bigint", nullable: false),
                     listed_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     promotional_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    time_start = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    time_end = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    time_start = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    time_end = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     create_at = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
