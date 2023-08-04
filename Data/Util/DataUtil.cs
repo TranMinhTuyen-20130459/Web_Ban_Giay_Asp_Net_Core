@@ -30,5 +30,22 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Util
             }
             return result;
         }
+
+        public static ArrayList GetListNameSize(MyDbContext dbContext)
+        {
+            var result = new ArrayList();
+            try
+            {
+                List<string> list_name_size = dbContext.Set<Size>().Select(size => size.name_size).ToList();
+                result = new ArrayList(list_name_size);
+            }
+            catch (Exception ex)
+            {
+                result = new ArrayList();
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
+
     }
 }
