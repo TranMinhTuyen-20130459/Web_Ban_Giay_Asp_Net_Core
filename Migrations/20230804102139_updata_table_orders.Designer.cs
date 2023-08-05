@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230801015538_update_table_order")]
-    partial class update_table_order
+    [Migration("20230804102139_updata_table_orders")]
+    partial class updata_table_orders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,8 +57,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("name_brand")
-                        .HasColumnType("int");
+                    b.Property<string>("name_brand")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("id_brand");
 
@@ -84,10 +85,10 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<decimal>("promotional_price")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime>("time_end")
+                    b.Property<DateTime?>("time_end")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("time_start")
+                    b.Property<DateTime?>("time_start")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("id_price_product");
@@ -164,7 +165,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("email_customer")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_address")
@@ -207,7 +207,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("note")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("order_value")
@@ -247,7 +246,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("time_updated")
+                    b.Property<DateTime?>("time_updated")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("to_address")

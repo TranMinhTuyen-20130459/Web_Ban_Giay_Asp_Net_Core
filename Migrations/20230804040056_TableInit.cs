@@ -42,7 +42,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 {
                     id_brand = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name_brand = table.Column<int>(type: "int", nullable: false)
+                    name_brand = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -119,7 +120,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     return_province_id = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    email_customer = table.Column<string>(type: "longtext", nullable: false)
+                    email_customer = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     to_name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -279,8 +280,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     id_product = table.Column<long>(type: "bigint", nullable: false),
                     listed_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     promotional_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    time_start = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    time_end = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    time_start = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    time_end = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     create_at = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },

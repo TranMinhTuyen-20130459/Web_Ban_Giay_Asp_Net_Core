@@ -48,15 +48,15 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [Required]
         public string from_province_id { get; set; }
 
-        public string return_name { get; set; }
-        public string return_phone { get; set; }
-        public string return_address { get; set; }
-        public string return_ward_name { get; set; }
-        public string return_district_name { get; set; }
-        public string return_province_name { get; set; }
-        public string return_ward_id { get; set; }
-        public string return_district_id { get; set; }
-        public string return_province_id { get; set; }
+        public string? return_name { get; set; }
+        public string? return_phone { get; set; }
+        public string? return_address { get; set; }
+        public string? return_ward_name { get; set; }
+        public string? return_district_name { get; set; }
+        public string? return_province_name { get; set; }
+        public string? return_ward_id { get; set; }
+        public string? return_district_id { get; set; }
+        public string? return_province_id { get; set; }
 
         public string? email_customer { get; set; } // nếu có ? thì giá trị đó có thể null , nếu không có thì mặc định = ""
 
@@ -87,7 +87,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [Required]
         public string to_province_id { get; set; }
 
-        public string note { get; set; }
+        public string? note { get; set; }
 
         [Required]
         public decimal ship_price { get; set; }
@@ -102,7 +102,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [DefaultValue("DateTime.Now")]
         public DateTime time_order { get; set; }
 
-        public DateTime time_updated { get; set; }
+        public DateTime? time_updated { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "id_status_order must be greater than or equal to 0.")]
         public int id_status_order { get; set; }

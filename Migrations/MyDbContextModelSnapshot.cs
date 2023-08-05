@@ -55,8 +55,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("name_brand")
-                        .HasColumnType("int");
+                    b.Property<string>("name_brand")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("id_brand");
 
@@ -82,10 +83,10 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<decimal>("promotional_price")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime>("time_end")
+                    b.Property<DateTime?>("time_end")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("time_start")
+                    b.Property<DateTime?>("time_start")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("id_price_product");
@@ -204,46 +205,36 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("note")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("order_value")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("return_address")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_phone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<decimal>("ship_price")
@@ -253,7 +244,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("time_updated")
+                    b.Property<DateTime?>("time_updated")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("to_address")

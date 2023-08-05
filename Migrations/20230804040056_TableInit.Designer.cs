@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230801020040_update_entity_order")]
-    partial class update_entity_order
+    [Migration("20230804040056_TableInit")]
+    partial class TableInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,8 +57,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("name_brand")
-                        .HasColumnType("int");
+                    b.Property<string>("name_brand")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("id_brand");
 
@@ -84,10 +85,10 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<decimal>("promotional_price")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<DateTime>("time_end")
+                    b.Property<DateTime?>("time_end")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("time_start")
+                    b.Property<DateTime?>("time_start")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("id_price_product");

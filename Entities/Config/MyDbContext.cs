@@ -4,7 +4,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
 {
     public class MyDbContext : DbContext
     {
-        public MyDbContext(DbContextOptions options) : base(options) { }
+
+        private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddFilter(DbLoggerCategory.Query.Name, LogLevel.Information);
+            builder.AddFilter(DbLoggerCategory.Database.Name, LogLevel.Information);
+            builder.AddConsole();
+        });
 
         public DbSet<Admin> Admins { get; set; }
 
@@ -33,6 +39,15 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
         public DbSet<SizeProduct> SizeProducts { get; set; }
 
         public DbSet<TypeProduct> TypeProducts { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
+
+            optionsBuilder.UseLoggerFactory(_loggerFactory);
+            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
