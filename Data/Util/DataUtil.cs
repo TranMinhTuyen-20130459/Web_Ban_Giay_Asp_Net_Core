@@ -4,15 +4,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Data.Util
 {
-    public class DataUtil
+    public partial class DataUtil
     {
-        public static void PrintArrayList(ArrayList arrayList)
-        {
-            foreach (var item in arrayList)
-            {
-                Console.Write(item + ",");
-            }
-        }
 
         public static ArrayList GetListIdProduct(MyDbContext dbContext)
         {
