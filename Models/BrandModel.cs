@@ -2,5 +2,8 @@
 {
     public class BrandModel
     {
+        public int id_brand { get; set; }
+
+        public string name_brand { get; set; }
     }
 }
