@@ -3,7 +3,7 @@ using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -14,7 +14,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _productRepository = productRepository;
         }
 
-        [HttpGet("{id}")]
+        // Lấy thông tin sản phẩm theo id
+        [HttpGet("products/{id}")]
         public IActionResult GetProductById(long id)
         {
             try

@@ -19,6 +19,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
         {
             var product = _dbContext.Products
                 .Include(p => p.brand) // Eager loading cho Brand
+                .Include(p => p.type_product) // Eager loading cho TypeProduct
                 .Include(p => p.list_image) // Eager loading cho danh sách các hình ảnh (list_image)
                 .Include(p => p.list_size)  // Eager loading cho danh sách các size sản phẩm (list_size)
                 .FirstOrDefault(p => p.id_product == id);
@@ -36,6 +37,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                     {
                         id_brand = product.brand.id_brand,
                         name_brand = product.brand.name_brand
+                    },
+                    type = new TypeProductModel
+                    {
+                        id_type = product.type_product.id_type,
+                        name_type = product.type_product.name_type
                     },
                     list_image = product.list_image.Select(img => new ImageProductModel
                     {

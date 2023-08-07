@@ -20,5 +20,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Model
 
         public BrandModel brand { get; set; }
 
+        public TypeProductModel type { get; set; }
+
     }
 }
