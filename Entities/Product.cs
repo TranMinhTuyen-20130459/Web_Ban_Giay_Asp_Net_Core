@@ -11,7 +11,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         KHUYEN_MAI = 4,
         TAM_HET_HANG = 5,
         HET_HANG = 6,
-        CAM_BAN = 7
+        KHONG_DUOC_BAN = 7
     }
     [Table("Products")]
     public class Product
@@ -29,13 +29,19 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [Range(0, int.MaxValue, ErrorMessage = "id_status_product must be greater than or equal to 0.")]
         public int id_status_product { get; set; }
 
-        public ICollection<HistoryPriceProduct> list_price { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "Listed price must be greater than or equal to 0.")]
+        public decimal listed_price { get; set; }
 
-        public ICollection<ImageProduct> images { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "Promotional price must be greater than or equal to 0.")]
+        public decimal promotional_price { get; set; }
 
-        public ICollection<SizeProduct> size_products { get; set; }
+        public ICollection<HistoryPriceProduct> list_history_price { get; set; }
 
-        public ICollection<OrderDetail> order_details { get; set; }
+        public ICollection<ImageProduct> list_image { get; set; }
+
+        public ICollection<SizeProduct> list_size { get; set; }
+
+        public ICollection<OrderDetail> list_order_detail { get; set; }
 
         [ForeignKey("id_brand")]
         public Brand brand { get; set; }

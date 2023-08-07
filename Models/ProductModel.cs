@@ -10,13 +10,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Model
 
         public int star_review { get; set; }
 
+        public decimal listed_price { get; set; }
+
+        public decimal promotional_price { get; set; }
+
         public List<ImageProductModel> list_image { get; set; }
 
         public List<SizeProductModel> list_size { get; set; }
-
-        public decimal listed_price;
-
-        public decimal promotional_price;
 
         public BrandModel brand { get; set; }
 

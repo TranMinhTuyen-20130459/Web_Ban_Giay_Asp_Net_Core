@@ -17,9 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Services\Interface\" />
-    <Folder Include="Services\Class\" />
     <Folder Include="Services\Util\" />
   </ItemGroup>
 

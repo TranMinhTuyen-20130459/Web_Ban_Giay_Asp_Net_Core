@@ -72,7 +72,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                                     star_review = random.Next(4, 6), // random ra số 4 or 5
                                     id_status_product = random.Next(1, 8),
                                     brand = brand,
-                                    type_product = typeProduct
+                                    type_product = typeProduct,
+                                    listed_price = random.Next(0, (int)(15 * Math.Pow(10, 6))),
+                                    promotional_price = random.Next(0, (int)(15 * Math.Pow(10, 6)))
                                 };
                                 dbContext.Products.Add(product);
                                 Console.WriteLine(".................");
