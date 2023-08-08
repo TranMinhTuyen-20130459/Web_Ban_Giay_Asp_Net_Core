@@ -15,7 +15,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         }
 
         // Lấy thông tin sản phẩm theo id
-        [HttpGet("products/id-product")]
+        [HttpGet("products/infor-product")]
         public IActionResult GetProductById([FromQuery] long id)
         {
             try
@@ -38,7 +38,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         }
 
         // lấy danh sách sản phẩm có tên liên quan đến từ khóa do user nhập vào 
-        [HttpGet("products/name-product")]
+        [HttpGet("products/list-product")]
         public IActionResult GetListProductByName([FromQuery] string name, [FromQuery] int quantity)
         {
             try
