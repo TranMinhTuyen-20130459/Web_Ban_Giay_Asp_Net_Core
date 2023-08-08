@@ -15,8 +15,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         }
 
         // Lấy thông tin sản phẩm theo id
-        [HttpGet("products/{id}")]
-        public IActionResult GetProductById(long id)
+        [HttpGet("products/id-product")]
+        public IActionResult GetProductById([FromQuery] long id)
         {
             try
             {

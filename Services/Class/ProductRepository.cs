@@ -76,7 +76,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                    p.name_product,
                    p.listed_price,
                    p.promotional_price,
-                   p.list_image
+                   p.list_image,
+                   p.id_status_product
                }).Take(quantity).ToList(); // lấy ra quantity product (vd: lấy ra 10 sản phẩm thỏa điều kiện trên)
 
 
@@ -93,7 +94,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                     {
                         id_image = img.id_image,
                         path_image = img.path
-                    }).ToList()
+                    }).ToList(),
+                    id_status_product = product.id_status_product
                 });
                 return listProductModel.ToList();
             }

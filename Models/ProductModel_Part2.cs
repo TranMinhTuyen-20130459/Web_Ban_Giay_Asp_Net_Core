@@ -11,5 +11,7 @@
         public decimal promotional_price { get; set; }
 
         public List<ImageProductModel> list_image { get; set; }
+
+        public int id_status_product { get; set; }
     }
 }
