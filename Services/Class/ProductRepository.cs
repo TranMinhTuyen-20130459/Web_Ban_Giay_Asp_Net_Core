@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Web_Ban_Giay_Asp_Net_Core.Entities;
 using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 using Web_Ban_Giay_Asp_Net_Core.Model;
 using Web_Ban_Giay_Asp_Net_Core.Models;
@@ -56,6 +57,45 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                 };
 
                 return productModel;
+            }
+
+            return null;
+        }
+
+        public List<ProductModel_Part2> GetListProductByName(string keyword, int quantity)
+        {
+
+            if (keyword.Length == 0 || quantity <= 0) return null;
+
+            var queryResult = _dbContext.Products
+               .Include(p => p.list_image) // Eager loading cho danh sách các hình ảnh (list_image)
+               .Where(p => p.name_product.Contains(keyword) && (p.id_status_product != (int)StatusProduct.KHONG_DUOC_BAN))
+               .Select(p => new
+               {
+                   p.id_product,
+                   p.name_product,
+                   p.listed_price,
+                   p.promotional_price,
+                   p.list_image
+               }).Take(quantity).ToList(); // lấy ra quantity product (vd: lấy ra 10 sản phẩm thỏa điều kiện trên)
+
+
+            if (queryResult != null)
+            {
+                // chuyển kết quả truy vấn sang danh sách các sản phẩm (List<ProductModel>)
+                var listProductModel = queryResult.Select(product => new ProductModel_Part2
+                {
+                    id_product = product.id_product,
+                    name_product = product.name_product,
+                    listed_price = product.listed_price,
+                    promotional_price = product.promotional_price,
+                    list_image = product.list_image.Select(img => new ImageProductModel
+                    {
+                        id_image = img.id_image,
+                        path_image = img.path
+                    }).ToList()
+                });
+                return listProductModel.ToList();
             }
 
             return null;
