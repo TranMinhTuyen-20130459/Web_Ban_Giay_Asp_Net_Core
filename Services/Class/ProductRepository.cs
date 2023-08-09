@@ -103,7 +103,54 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
             return null;
         }
 
+        public List<ProductModel_Part2> GetListProductByTypeAndStatus(int id_type, int id_status, int page, int pageSize)
+        {
 
+            if (page <= 0 || pageSize <= 0) return null;
+
+            var queryResult = _dbContext.Products
+                                        .Include(p => p.list_image)
+                                        .Where(p => p.type_product.id_type == id_type && (p.id_status_product == id_status))
+                                        .Select(p => new // Chọn các trường dữ liệu cần thiết
+                                        {
+                                            p.id_product,
+                                            p.name_product,
+                                            p.listed_price,
+                                            p.promotional_price,
+                                            p.list_image,
+                                            p.id_status_product
+                                        })
+                                        .Skip((page - 1) * pageSize) // Bỏ qua các sản phẩm trước trang hiện tại
+                                        .Take(pageSize); // Lấy số lượng sản phẩm tối đa cho trang hiện tại
+
+            if (queryResult != null)
+            {
+                var listProductModel = queryResult.Select(product => new ProductModel_Part2
+                {
+                    id_product = product.id_product,
+                    name_product = product.name_product,
+                    listed_price = product.listed_price,
+                    promotional_price = product.promotional_price,
+                    list_image = product.list_image.Select(img => new ImageProductModel
+                    {
+                        id_image = img.id_image,
+                        path_image = img.path
+                    }).ToList(),
+                    id_status_product = product.id_status_product
+                });
+
+                return listProductModel.ToList();
+            }
+
+            return null;
+        }
+
+        public int GetProductCountOfTypeAndStatus(int id_type, int id_status)
+        {
+            var queryResult = _dbContext.Products.Where(p => p.type_product.id_type == id_type && (p.id_status_product == id_status));
+
+            return queryResult.Count();
+        }
     }
 }
 
