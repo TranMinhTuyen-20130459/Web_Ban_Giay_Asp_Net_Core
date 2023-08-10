@@ -74,6 +74,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                {
                    p.id_product,
                    p.name_product,
+                   p.star_review,
                    p.listed_price,
                    p.promotional_price,
                    p.list_image,
@@ -88,6 +89,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                 {
                     id_product = product.id_product,
                     name_product = product.name_product,
+                    star_review = product.star_review,
                     listed_price = product.listed_price,
                     promotional_price = product.promotional_price,
                     list_image = product.list_image.Select(img => new ImageProductModel
@@ -115,6 +117,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                                         {
                                             p.id_product,
                                             p.name_product,
+                                            p.star_review,
                                             p.listed_price,
                                             p.promotional_price,
                                             p.list_image,
@@ -129,6 +132,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                 {
                     id_product = product.id_product,
                     name_product = product.name_product,
+                    star_review = product.star_review,
                     listed_price = product.listed_price,
                     promotional_price = product.promotional_price,
                     list_image = product.list_image.Select(img => new ImageProductModel

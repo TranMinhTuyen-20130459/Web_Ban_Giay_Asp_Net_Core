@@ -6,6 +6,8 @@
 
         public string name_product { get; set; }
 
+        public int star_review { get; set; }
+
         public decimal listed_price { get; set; }
 
         public decimal promotional_price { get; set; }

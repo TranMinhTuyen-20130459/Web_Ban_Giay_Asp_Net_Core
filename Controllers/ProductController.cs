@@ -46,28 +46,20 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(name))
-                {
-                    return BadRequest("Keyword must not be empty.");
-                }
-
-                if (quantity <= 0)
-                {
-                    return BadRequest("Quantity must be a positive number.");
-                }
+                if (string.IsNullOrEmpty(name) || quantity <= 0) return BadRequest();
 
                 var data = _productRepository.GetListProductByName(name, quantity);
 
                 if (data == null || data.Count == 0)
                 {
-                    return NotFound("No products found matching the provided keyword.");
+                    return NotFound();
                 }
 
                 return Ok(new Response<List<ProductModel_Part2>>(data));
             }
             catch (Exception)
             {
-                return StatusCode(500, "An error occurred on the server.");
+                return StatusCode(500);
             }
 
         }
