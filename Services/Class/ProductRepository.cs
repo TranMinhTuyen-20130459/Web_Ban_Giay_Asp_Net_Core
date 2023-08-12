@@ -62,29 +62,42 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
             return null;
         }
 
-        public List<ProductModel_Part2> GetListProductByName(string keyword, int quantity)
+        public List<ProductModel_Part2> GetListProductOfTypeByName(int id_type, string keyword, int quantity)
         {
+            if (string.IsNullOrEmpty(keyword) || quantity <= 0) return null;
 
-            if (keyword.Length == 0 || quantity <= 0) return null;
+            IQueryable<Product> baseQuery = _dbContext.Products
+                .Include(p => p.list_image);
 
-            var queryResult = _dbContext.Products
-               .Include(p => p.list_image) // Eager loading cho danh sách các hình ảnh (list_image)
-               .Where(p => p.name_product.Contains(keyword) && (p.id_status_product != (int)StatusProduct.KHONG_DUOC_BAN))
-               .Select(p => new
-               {
-                   p.id_product,
-                   p.name_product,
-                   p.star_review,
-                   p.listed_price,
-                   p.promotional_price,
-                   p.list_image,
-                   p.id_status_product
-               }).Take(quantity).ToList(); // lấy ra quantity product (vd: lấy ra 10 sản phẩm thỏa điều kiện trên)
+            if (id_type == -9999) // tất cả các loại sản phẩm
+            {
+                baseQuery = baseQuery.Where(p =>
+                                           (p.name_product.Contains(keyword)) &&
+                                           (p.id_status_product != (int)StatusProduct.KHONG_DUOC_BAN));
+            }
+            else
+            {
+                baseQuery = baseQuery.Where(p =>
+                                           (p.type_product.id_type == id_type) &&
+                                           (p.name_product.Contains(keyword)) &&
+                                           (p.id_status_product != (int)StatusProduct.KHONG_DUOC_BAN));
+            }
 
+            var queryResult = baseQuery
+                              .Select(p => new
+                              {
+                                  p.id_product,
+                                  p.name_product,
+                                  p.star_review,
+                                  p.listed_price,
+                                  p.promotional_price,
+                                  p.list_image,
+                                  p.id_status_product
+                              }).Take(quantity).ToList(); // lấy ra quantity product (vd: lấy ra 10 sản phẩm thỏa điều kiện trên)
 
             if (queryResult != null)
             {
-                // chuyển kết quả truy vấn sang danh sách các sản phẩm (List<ProductModel>)
+                // chuyển kết quả truy vấn sang danh sách các sản phẩm (List<ProductModel_Part2>)
                 var listProductModel = queryResult.Select(product => new ProductModel_Part2
                 {
                     id_product = product.id_product,
