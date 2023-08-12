@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230804102139_updata_table_orders")]
-    partial class updata_table_orders
+    [Migration("20230812042130_DbInit")]
+    partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -345,9 +345,15 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<int>("id_type_product")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("listed_price")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<string>("name_product")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<decimal>("promotional_price")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("star_review")
                         .HasColumnType("int");
@@ -437,7 +443,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.HistoryPriceProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("list_price")
+                        .WithMany("list_history_price")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -448,7 +454,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.ImageProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("images")
+                        .WithMany("list_image")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -465,7 +471,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .IsRequired();
 
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("order_details")
+                        .WithMany("list_order_detail")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -516,7 +522,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.SizeProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("size_products")
+                        .WithMany("list_size")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -549,13 +555,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.Product", b =>
                 {
-                    b.Navigation("images");
+                    b.Navigation("list_history_price");
 
-                    b.Navigation("list_price");
+                    b.Navigation("list_image");
 
-                    b.Navigation("order_details");
+                    b.Navigation("list_order_detail");
 
-                    b.Navigation("size_products");
+                    b.Navigation("list_size");
                 });
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.Role", b =>

@@ -5,7 +5,7 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 {
-    public class DataProduct : IAddData
+    public class DataProductShoes : IAddData
     {
         public static string[] arr_name_products_nike = {"NIKE PEGASUS 40", "NIKE RUN SWIFT 3", "NIKE AIR MAX 90 SE",
             "NIKE AIR FORCE 1 LV8", "NIKE AIR MAX 270 SE", "NIKE GAMMA FORCE",
@@ -27,7 +27,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 
         public static List<string[]> list_arr_name_product = new List<string[]>();
 
-        static DataProduct()
+        static DataProductShoes()
         {
             list_arr_name_product.Add(arr_name_products_nike);
             list_arr_name_product.Add(arr_name_products_adidas);

@@ -24,6 +24,22 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Util
             return result;
         }
 
+        public static ArrayList GetListIdProductByType(MyDbContext dbContext, int id_type)
+        {
+            var result = new ArrayList();
+            try
+            {
+                List<long> list_id_product = dbContext.Set<Product>().Where(p => p.type_product.id_type == id_type).Select(p => p.id_product).ToList();
+                result = new ArrayList(list_id_product);
+            }
+            catch (Exception ex)
+            {
+                result = new ArrayList();
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
+
         public static ArrayList GetListNameSize(MyDbContext dbContext)
         {
             var result = new ArrayList();

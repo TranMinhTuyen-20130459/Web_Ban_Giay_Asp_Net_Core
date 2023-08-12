@@ -7,7 +7,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
     {
         GIAY = 1,
         DEP = 2,
-        PHU_KIEN = 3
+        DO_THE_THAO = 3,
+        PHU_KIEN = 4
     }
 
     [Table("Type_Products")]

@@ -7,7 +7,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 {
     public class DataTypeProduct : IAddData
     {
-        public string[] arr_type_products = { "GIÀY", "DÉP", "PHỤ KIỆN" };
+        public string[] arr_type_products = { "GIÀY", "DÉP", "ĐỒ THỂ THAO", "PHỤ KIỆN" };
 
         public void AddDataToTable(MyDbContext dbContext)
         {
