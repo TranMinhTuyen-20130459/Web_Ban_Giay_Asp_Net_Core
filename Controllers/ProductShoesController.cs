@@ -17,6 +17,27 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _productRepository = productRepository;
         }
 
+        // Lấy danh sách sản phẩm là GIÀY có tên liên quan đến từ khóa do user nhập vào 
+        [HttpGet("ds-giay")]
+        public IActionResult GetListShoesByName([FromQuery] string name, [FromQuery] int quantity)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(name) || quantity <= 0) return BadRequest();
+
+                var data = _productRepository.GetListProductOfTypeByName((int)TypeProductEnum.GIAY, name, quantity);
+
+                if (data == null || data.Count == 0) return NotFound();
+
+                return Ok(new Response<List<ProductModel_Part2>>(data));
+
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
         // Lấy danh sách sản phẩm là loại GIÀY có trạng thái là MỚI
         [HttpGet("ds-giay-moi")]
 
@@ -89,28 +110,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 return StatusCode(500);
             }
         }
-
-        // Lấy danh sách sản phẩm là GIÀY có tên liên quan đến từ khóa do user nhập vào 
-        [HttpGet("ds-giay")]
-        public IActionResult GetListProductOfTypeByName([FromQuery] string name, [FromQuery] int quantity)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(name) || quantity <= 0) return BadRequest();
-
-                var data = _productRepository.GetListProductOfTypeByName((int)TypeProductEnum.GIAY, name, quantity);
-
-                if (data == null || data.Count == 0) return NotFound();
-
-                return Ok(new Response<List<ProductModel_Part2>>(data));
-
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
-
 
     }
 }

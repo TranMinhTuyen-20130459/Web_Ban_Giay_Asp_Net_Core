@@ -14,7 +14,7 @@
         public PaginationFilter(int page, int pageSize)
         {
             this.current_page = page < 1 ? 1 : page;
-            this.page_size = pageSize > 15 ? 15 : pageSize;
+            this.page_size = pageSize > 15 ? 15 : pageSize; // mặc định trả về tối đa 15 item trên 1 page
         }
     }
 }
