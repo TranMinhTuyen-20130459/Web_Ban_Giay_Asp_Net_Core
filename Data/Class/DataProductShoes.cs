@@ -74,7 +74,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                                     brand = brand,
                                     type_product = typeProduct,
                                     listed_price = random.Next(0, (int)(15 * Math.Pow(10, 6))),
-                                    promotional_price = random.Next(0, (int)(15 * Math.Pow(10, 6)))
+                                    promotional_price = random.Next(0, (int)(15 * Math.Pow(10, 6))),
+                                    id_sex = (byte)random.Next(1, 3)
                                 };
                                 dbContext.Products.Add(product);
                                 Console.WriteLine(".................");

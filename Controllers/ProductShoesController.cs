@@ -40,7 +40,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
         // Lấy danh sách sản phẩm là loại GIÀY có trạng thái là MỚI
         [HttpGet("ds-giay-moi")]
-
         public IActionResult GetListShoesHaveStatusNew([FromQuery] int page, [FromQuery] int pageSize)
         {
             try
@@ -64,7 +63,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
         // Lấy danh sách sản phẩm là loại GIÀY có trạng thái là HOT
         [HttpGet("ds-giay-hot")]
-
         public IActionResult GetListShoesHaveStatusHOT([FromQuery] int page, [FromQuery] int pageSize)
         {
             try
@@ -86,10 +84,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-
         // Lấy danh sách sản phẩm là loại GIÀY có trạng thái là KHUYEN_MAI
         [HttpGet("ds-giay-khuyen_mai")]
-
         public IActionResult GetListShoesHaveStatusPromotional([FromQuery] int page, [FromQuery] int pageSize)
         {
             try
@@ -101,6 +97,81 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
 
                 var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProduct.KHUYEN_MAI);
+
+                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        // Lấy danh sách sản phẩm là loại GIÀY của hãng NIKE dành cho NAM
+        [HttpGet("ds-giay-nike-nam")]
+        public IActionResult GetListShoesOfNikeForMen([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NAM,
+                                validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) return NotFound();
+
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NAM);
+
+                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        // Lấy danh sách sản phẩm là loại GIÀY của hãng ADIDAS dành cho NAM
+        [HttpGet("ds-giay-adidas-nam")]
+        public IActionResult GetListShoesOfAdidasForMen([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NAM,
+                                validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) return NotFound();
+
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NAM);
+
+                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        // Lấy danh sách sản phẩm là loại GIÀY của hãng JORDAN dành cho NAM
+        [HttpGet("ds-giay-jordan-nam")]
+        public IActionResult GetListShoesOfJordanForMen([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NAM,
+                                validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) return NotFound();
+
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NAM);
 
                 return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 

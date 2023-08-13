@@ -3,6 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
+    public enum BrandEnum
+    {
+        NIKE = 1,
+        ADIDAS = 2,
+        JORDAN = 3
+    }
+
     [Table("Brands")]
     public class Brand
     {

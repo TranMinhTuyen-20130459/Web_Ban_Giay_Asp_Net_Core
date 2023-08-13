@@ -168,6 +168,74 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
 
             return queryResult.Count();
         }
+
+        public List<ProductModel_Part2> GetListProductBy_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex, int page, int pageSize)
+        {
+            if (page <= 0 || pageSize <= 0) return null;
+
+            IQueryable<Product> baseQuery = _dbContext.Products.Include(p => p.list_image);
+
+            #region Filter
+            baseQuery = baseQuery.Where(p =>
+                (p.type_product.id_type == id_type) &&
+                (p.brand.id_brand == id_brand) &&
+                (p.id_sex == id_sex) &&
+                (p.id_status_product != (int)StatusProduct.KHONG_DUOC_BAN)
+                );
+            #endregion
+
+            #region Paging
+            baseQuery = baseQuery.Skip((page - 1) * pageSize).Take(pageSize);
+            #endregion
+
+            var queryResult = baseQuery.Select(p => new
+            {
+                p.id_product,
+                p.name_product,
+                p.star_review,
+                p.listed_price,
+                p.promotional_price,
+                p.list_image,
+                p.id_status_product
+            });
+
+            if (queryResult != null)
+            {
+                // Ánh xạ kết quả từ queryResult về List<ProductModel_Part2>
+                var productModel = queryResult.Select(product => new ProductModel_Part2
+                {
+                    id_product = product.id_product,
+                    name_product = product.name_product,
+                    star_review = product.star_review,
+                    listed_price = product.listed_price,
+                    promotional_price = product.promotional_price,
+                    list_image = product.list_image.Select(img => new ImageProductModel
+                    {
+                        id_image = img.id_image,
+                        path_image = img.path
+                    }).ToList(),
+                    id_status_product = product.id_status_product
+                });
+
+                return productModel.ToList();
+            }
+
+            return null;
+
+        }
+
+        public int GetProductCountOf_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex)
+        {
+            var queryResult = _dbContext.Products
+                .Where(p =>
+                (p.type_product.id_type == id_type) &&
+                (p.brand.id_brand == id_brand) &&
+                (p.id_sex == id_sex) &&
+                (p.id_status_product != (int)StatusProduct.KHONG_DUOC_BAN)
+                );
+
+            return queryResult.Count();
+        }
     }
 }
 

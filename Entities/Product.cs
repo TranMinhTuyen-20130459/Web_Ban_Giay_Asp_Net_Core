@@ -13,6 +13,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         HET_HANG = 6,
         KHONG_DUOC_BAN = 7
     }
+
+    public enum Sex
+    {
+        NAM = 1,
+        NU = 2
+    }
+
     [Table("Products")]
     public class Product
     {
@@ -48,5 +55,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
 
         [ForeignKey("id_type_product")]
         public TypeProduct type_product { get; set; }
+
+        [Range(1, 3, ErrorMessage = "id_sex must be >=1  AND <= 3")]
+        public byte id_sex { get; set; }
     }
 }
