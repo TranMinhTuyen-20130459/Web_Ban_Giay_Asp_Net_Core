@@ -182,5 +182,80 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
+        // Lấy danh sách sản phẩm là loại GIÀY của hãng NIKE dành cho NỮ
+        [HttpGet("ds-giay-nike-nu")]
+        public IActionResult GetListShoesOfNikeForWomen([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NU,
+                                validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) return NotFound();
+
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NU);
+
+                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        // Lấy danh sách sản phẩm là loại GIÀY của hãng ADIDAS dành cho NỮ
+        [HttpGet("ds-giay-adidas-nu")]
+        public IActionResult GetListShoesOfAdidasForWomen([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NU,
+                                validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) return NotFound();
+
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NU);
+
+                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
+        // Lấy danh sách sản phẩm là loại GIÀY của hãng JORDAN dành cho NỮ
+        [HttpGet("ds-giay-jordan-nu")]
+        public IActionResult GetListShoesOfJordanForWomen([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NU,
+                                validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) return NotFound();
+
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NU);
+
+                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
+        }
+
     }
 }
