@@ -66,6 +66,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
         {
             if (string.IsNullOrEmpty(keyword) || quantity <= 0) return null;
 
+            /*
+             * IQueryable là một interface trong Entity Framework Core (EF Core) cho phép bạn xây dựng các truy vấn LINQ trên dữ liệu cơ sở dữ liệu mà không cần thực hiện truy vấn ngay lập tức. 
+             * Thay vào đó, truy vấn chỉ tồn tại dưới dạng một chuỗi các biểu thức LINQ. 
+             * Khi bạn yêu cầu dữ liệu thực sự bằng cách gọi các phương thức như ToList(), FirstOrDefault(), Count(), Sum() và những phương thức tương tự, truy vấn sẽ được biên dịch thành SQL và thực hiện trên cơ sở dữ liệu để trả về kết quả tương ứng.
+             * Lợi ích của việc sử dụng IQueryable bao gồm khả năng tối ưu hóa truy vấn, sự hỗ trợ cho việc lười biếng (lazy loading), khả năng filter và projection trên cơ sở dữ liệu, tạo các truy vấn phức tạp và cải thiện hiệu suất tương tác với dữ liệu. 
+             */
+
             IQueryable<Product> baseQuery = _dbContext.Products
                 .Include(p => p.list_image);
 
@@ -173,6 +180,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
         {
             if (page <= 0 || pageSize <= 0) return null;
 
+            /*
+            * IQueryable là một interface trong Entity Framework Core (EF Core) cho phép bạn xây dựng các truy vấn LINQ trên dữ liệu cơ sở dữ liệu mà không cần thực hiện truy vấn ngay lập tức. 
+            * Thay vào đó, truy vấn chỉ tồn tại dưới dạng một chuỗi các biểu thức LINQ. 
+            * Khi bạn yêu cầu dữ liệu thực sự bằng cách gọi các phương thức như ToList(), FirstOrDefault(), Count(), Sum() và những phương thức tương tự, truy vấn sẽ được biên dịch thành SQL và thực hiện trên cơ sở dữ liệu để trả về kết quả tương ứng.
+            * Lợi ích của việc sử dụng IQueryable bao gồm khả năng tối ưu hóa truy vấn, sự hỗ trợ cho việc lười biếng (lazy loading), khả năng filter và projection trên cơ sở dữ liệu, tạo các truy vấn phức tạp và cải thiện hiệu suất tương tác với dữ liệu. 
+            */
+
             IQueryable<Product> baseQuery = _dbContext.Products.Include(p => p.list_image);
 
             #region Filter
@@ -218,6 +232,14 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                 });
 
                 return productModel.ToList();
+
+                /*
+                 * Tất cả mọi thứ trong biểu thức truy vấn của bạn chỉ là một lời hứa rằng "Khi tôi thực sự cần dữ liệu, tôi sẽ đi lấy nó từ cơ sở dữ liệu." 
+                 * Khi bạn gọi .ToList(), bạn thực sự đang nói "Ồ, tôi muốn dữ liệu ngay bây giờ." 
+                 * Khi bạn không gọi .ToList() trong queryResult, lời hứa này chưa thực sự được thực hiện, 
+                 * nhưng khi bạn gọi .ToList() ở phần cuối, nó đang giữ lời hứa và thực hiện truy vấn thực sự để lấy dữ liệu từ cơ sở dữ liệu và chuyển thành danh sách thực tế.
+                 */
+
             }
 
             return null;
