@@ -253,7 +253,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     listed_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     promotional_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     id_brand = table.Column<int>(type: "int", nullable: false),
-                    id_type_product = table.Column<int>(type: "int", nullable: false)
+                    id_type_product = table.Column<int>(type: "int", nullable: false),
+                    id_sex = table.Column<byte>(type: "tinyint unsigned", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -325,14 +326,18 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 name: "Order_Details",
                 columns: table => new
                 {
+                    id_order_detail = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     id_order = table.Column<long>(type: "bigint", nullable: false),
                     id_product = table.Column<long>(type: "bigint", nullable: false),
+                    name_size = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     quantity = table.Column<int>(type: "int", nullable: false),
                     price = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order_Details", x => new { x.id_order, x.id_product });
+                    table.PrimaryKey("PK_Order_Details", x => x.id_order_detail);
                     table.ForeignKey(
                         name: "FK_Order_Details_Orders_id_order",
                         column: x => x.id_order,
@@ -384,6 +389,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 name: "IX_Image_Products_id_product",
                 table: "Image_Products",
                 column: "id_product");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_Details_id_order",
+                table: "Order_Details",
+                column: "id_order");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_Details_id_product",

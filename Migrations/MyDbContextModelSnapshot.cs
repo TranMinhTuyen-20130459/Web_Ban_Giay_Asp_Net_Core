@@ -293,11 +293,19 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.OrderDetail", b =>
                 {
+                    b.Property<long>("id_order_detail")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
                     b.Property<long>("id_order")
                         .HasColumnType("bigint");
 
                     b.Property<long>("id_product")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("name_size")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("price")
                         .HasColumnType("decimal(65,30)");
@@ -305,7 +313,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("id_order", "id_product");
+                    b.HasKey("id_order_detail");
+
+                    b.HasIndex("id_order");
 
                     b.HasIndex("id_product");
 

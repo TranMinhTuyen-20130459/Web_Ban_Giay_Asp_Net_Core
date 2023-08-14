@@ -87,11 +87,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
                 .HasForeignKey(sp => sp.name_size)
                 .OnDelete(DeleteBehavior.Cascade);
 
-
-            // Cấu hình khóa chính cho Entity OrderDetail
-            modelBuilder.Entity<OrderDetail>()
-                .HasKey(od => new { od.id_order, od.id_product });
-
             // Cấu hình quan hệ nhiều-một từ OrderDetail tới Order
             modelBuilder.Entity<OrderDetail>()
                 .HasOne(od => od.order)

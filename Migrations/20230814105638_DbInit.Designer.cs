@@ -11,7 +11,7 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230812042130_DbInit")]
+    [Migration("20230814105638_DbInit")]
     partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -295,11 +295,19 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.OrderDetail", b =>
                 {
+                    b.Property<long>("id_order_detail")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
                     b.Property<long>("id_order")
                         .HasColumnType("bigint");
 
                     b.Property<long>("id_product")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("name_size")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("price")
                         .HasColumnType("decimal(65,30)");
@@ -307,7 +315,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("id_order", "id_product");
+                    b.HasKey("id_order_detail");
+
+                    b.HasIndex("id_order");
 
                     b.HasIndex("id_product");
 
@@ -338,6 +348,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
                     b.Property<int>("id_brand")
                         .HasColumnType("int");
+
+                    b.Property<byte>("id_sex")
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<int>("id_status_product")
                         .HasColumnType("int");
