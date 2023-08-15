@@ -73,7 +73,14 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
 
                         if (sizeProduct != null)
                         {
-                            sizeProduct.quantity_available -= orderDetailModel.quantity;
+                            if (sizeProduct.quantity_available >= orderDetailModel.quantity)
+                            {
+                                sizeProduct.quantity_available -= orderDetailModel.quantity;
+                            }
+                            else
+                            {
+                                throw new Exception("So luong san pham dat mua vuot qua so luong san pham dang con trong he thong");
+                            }
                         }
                     }
 
