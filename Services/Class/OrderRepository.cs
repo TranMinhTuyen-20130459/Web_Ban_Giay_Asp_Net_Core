@@ -21,16 +21,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
 
             var orderEntity = new Order
             {
-                from_name = "",
-                from_phone = "",
-                from_address = "",
-                from_ward_name = "",
-                from_district_name = "",
-                from_province_name = "",
-                from_ward_id = "",
-                from_district_id = "",
-                from_province_id = "",
-
                 to_name = orderModel.name_customer,
                 to_phone = orderModel.phone,
                 to_address = addressModel.address,

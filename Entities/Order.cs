@@ -21,32 +21,15 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long id_order { get; set; }
 
-        [Required]
-        public string from_name { get; set; }
-
-        [Required]
-        public string from_phone { get; set; }
-
-        [Required]
-        public string from_address { get; set; }
-
-        [Required]
-        public string from_ward_name { get; set; }
-
-        [Required]
-        public string from_district_name { get; set; }
-
-        [Required]
-        public string from_province_name { get; set; }
-
-        [Required]
-        public string from_ward_id { get; set; }
-
-        [Required]
-        public string from_district_id { get; set; }
-
-        [Required]
-        public string from_province_id { get; set; }
+        public string? from_name { get; set; }
+        public string? from_phone { get; set; }
+        public string? from_address { get; set; }
+        public string? from_ward_name { get; set; }
+        public string? from_district_name { get; set; }
+        public string? from_province_name { get; set; }
+        public string? from_ward_id { get; set; }
+        public string? from_district_id { get; set; }
+        public string? from_province_id { get; set; }
 
         public string? return_name { get; set; }
         public string? return_phone { get; set; }
@@ -60,43 +43,21 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
 
         public string? email_customer { get; set; } // nếu có ? thì giá trị đó có thể null , nếu không có thì mặc định = ""
 
-        [Required]
-        public string to_name { get; set; }
-
-        [Required]
-        public string to_phone { get; set; }
-
-        [Required]
-        public string to_address { get; set; }
-
-        [Required]
-        public string to_ward_name { get; set; }
-
-        [Required]
-        public string to_district_name { get; set; }
-
-        [Required]
-        public string to_province_name { get; set; }
-
-        [Required]
-        public string to_ward_id { get; set; }
-
-        [Required]
-        public string to_district_id { get; set; }
-
-        [Required]
-        public string to_province_id { get; set; }
+        public string? to_name { get; set; }
+        public string? to_phone { get; set; }
+        public string? to_address { get; set; }
+        public string? to_ward_name { get; set; }
+        public string? to_district_name { get; set; }
+        public string? to_province_name { get; set; }
+        public string? to_ward_id { get; set; }
+        public string? to_district_id { get; set; }
+        public string? to_province_id { get; set; }
 
         public string? note { get; set; }
 
-        [Required]
-        public decimal ship_price { get; set; }
-
-        [Required]
-        public decimal order_value { get; set; }
-
-        [Required]
-        public decimal total_price { get; set; }
+        public decimal? ship_price { get; set; }
+        public decimal? order_value { get; set; }
+        public decimal? total_price { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [DefaultValue("DateTime.Now")]

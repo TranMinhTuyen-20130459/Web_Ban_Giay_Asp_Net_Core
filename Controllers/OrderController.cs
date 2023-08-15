@@ -16,7 +16,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         }
 
         [HttpPost("create-order")]
-        public IActionResult CreateOrder([FromBody] OrderModel order)
+        public IActionResult CreateOrder([FromBody] OrderModel orderModel)
         {
             // Kiểm tra tính hợp lệ của dữ liệu
             if (!ModelState.IsValid)
@@ -26,7 +26,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
             try
             {
-                var id_order = _orderRepository.CreateOrder(order);
+                var id_order = _orderRepository.CreateOrder(orderModel);
 
                 if (id_order == null) return StatusCode(500); // không tạo được đơn hàng
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
@@ -10,9 +11,10 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230815091657_update_table_orders_v1")]
+    partial class update_table_orders_v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,30 +168,39 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_address")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_district_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_district_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_phone")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_province_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_province_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_ward_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_ward_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("id_status_order")
@@ -198,7 +209,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<string>("note")
                         .HasColumnType("longtext");
 
-                    b.Property<decimal?>("order_value")
+                    b.Property<decimal>("order_value")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("return_address")
@@ -228,7 +239,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<string>("return_ward_name")
                         .HasColumnType("longtext");
 
-                    b.Property<decimal?>("ship_price")
+                    b.Property<decimal>("ship_price")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<DateTime>("time_order")
@@ -239,33 +250,42 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("to_address")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_district_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_district_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_phone")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_province_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_province_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_ward_id")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_ward_name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal?>("total_price")
+                    b.Property<decimal>("total_price")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("id_order");
