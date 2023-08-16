@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Web_Ban_Giay_Asp_Net_Core.Models;
 using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
+using Web_Ban_Giay_Asp_Net_Core.Services.Util;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
@@ -28,14 +29,31 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             {
                 var id_order = _orderRepository.CreateOrder(orderModel);
 
-                if (id_order == null) return StatusCode(500); // không tạo được đơn hàng
+                if (id_order == null) return StatusCode(500); // không tạo được đơn hàng do lỗi khi thực hiện câu truy vấn
+
+                if (id_order == -1)
+                {
+                    var errorResponse = new ErrorResponse
+                    {
+                        status = 500,
+                        error_code = "-1",
+                        error_message = "So luong san pham dat mua vuot qua so luong san pham dang con trong he thong"
+                    };
+                    return StatusCode(500, errorResponse);
+                }
 
                 // Trả về mã trạng thái 201 (Created) cùng với id_order
                 return StatusCode(201, new { id_order });
             }
             catch
             {
-                return StatusCode(500);
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
             }
         }
     }
