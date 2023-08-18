@@ -54,7 +54,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                     return NotFound();
                 }
 
-                return Ok(new Response<List<ProductModel_Part2>>(data));
+                return Ok(new Response<List<ProductModel_Ver2>>(data));
             }
             catch (Exception)
             {

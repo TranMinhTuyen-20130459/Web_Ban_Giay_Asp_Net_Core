@@ -29,7 +29,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
                 if (data == null || data.Count == 0) return NotFound();
 
-                return Ok(new Response<List<ProductModel_Part2>>(data));
+                return Ok(new Response<List<ProductModel_Ver2>>(data));
 
             }
             catch
@@ -53,7 +53,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
                 var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.MOI);
 
-                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+                return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
             }
             catch
@@ -77,7 +77,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
                 var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.HOT);
 
-                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+                return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
             }
             catch
@@ -102,7 +102,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
                 var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.KHUYEN_MAI);
 
-                return Ok(new PagedResponse<List<ProductModel_Part2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+                return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
             }
             catch

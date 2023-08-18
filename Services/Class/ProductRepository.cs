@@ -62,7 +62,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
             return null;
         }
 
-        public List<ProductModel_Part2> GetListProductOfTypeByName(int id_type, string keyword, int quantity)
+        public List<ProductModel_Ver2> GetListProductOfTypeByName(int id_type, string keyword, int quantity)
         {
             if (string.IsNullOrEmpty(keyword) || quantity <= 0) return null;
 
@@ -105,7 +105,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
             if (queryResult != null)
             {
                 // chuyển kết quả truy vấn sang danh sách các sản phẩm (List<ProductModel_Part2>)
-                var listProductModel = queryResult.Select(product => new ProductModel_Part2
+                var listProductModel = queryResult.Select(product => new ProductModel_Ver2
                 {
                     id_product = product.id_product,
                     name_product = product.name_product,
@@ -125,7 +125,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
             return null;
         }
 
-        public List<ProductModel_Part2> GetListProductByTypeAndStatus(int id_type, int id_status, int page, int pageSize)
+        public List<ProductModel_Ver2> GetListProductByTypeAndStatus(int id_type, int id_status, int page, int pageSize)
         {
 
             if (page <= 0 || pageSize <= 0) return null;
@@ -148,7 +148,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
 
             if (queryResult != null)
             {
-                var listProductModel = queryResult.Select(product => new ProductModel_Part2
+                var listProductModel = queryResult.Select(product => new ProductModel_Ver2
                 {
                     id_product = product.id_product,
                     name_product = product.name_product,
@@ -176,7 +176,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
             return queryResult.Count();
         }
 
-        public List<ProductModel_Part2> GetListProductBy_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex, int page, int pageSize)
+        public List<ProductModel_Ver2> GetListProductBy_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex, int page, int pageSize)
         {
             if (page <= 0 || pageSize <= 0) return null;
 
@@ -216,7 +216,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
             if (queryResult != null)
             {
                 // Ánh xạ kết quả từ queryResult về List<ProductModel_Part2>
-                var productModel = queryResult.Select(product => new ProductModel_Part2
+                var productModel = queryResult.Select(product => new ProductModel_Ver2
                 {
                     id_product = product.id_product,
                     name_product = product.name_product,
