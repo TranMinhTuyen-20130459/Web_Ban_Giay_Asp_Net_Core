@@ -4,7 +4,7 @@
     {
         public HistoryOrderModel? infor_order { get; set; }
 
-        public List<OrderDetailModel_Ver2>? list_order_detail { get; set; }
+        public List<OrderDetailModel_Ver2>? order_details { get; set; }
 
         public decimal? order_value { get; set; }
         public decimal? ship_price { get; set; }
