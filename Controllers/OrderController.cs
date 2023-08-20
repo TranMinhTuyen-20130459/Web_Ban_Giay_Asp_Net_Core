@@ -16,7 +16,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _orderRepository = orderRepository;
         }
 
-        // tạo mới một đơn hàng
+        // Tạo mới một đơn hàng
         [HttpPost("create-order")]
         public IActionResult CreateOrder([FromBody] OrderModel orderModel)
         {
@@ -58,7 +58,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // lấy ra chi tiết đơn hàng theo id đơn hàng 
+        // Trả về chuỗi Json thông tin chi tiết của đơn hàng 
         [HttpGet("infor-order")]
         public IActionResult GetOrderDetailByIdOrder([FromQuery] long id_order)
         {

@@ -17,7 +17,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _productRepository = productRepository;
         }
 
-        // Lấy danh sách sản phẩm là GIÀY có tên liên quan đến từ khóa do user nhập vào 
+        // Trả về Json danh sách sản phẩm là GIÀY có tên liên quan đến từ khóa do user nhập vào 
         [HttpGet("ds-giay")]
         public IActionResult GetListShoesByName([FromQuery] string name, [FromQuery] int quantity)
         {
@@ -38,7 +38,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY có trạng thái là MỚI
+        // Trả về Json danh sách sản phẩm là loại GIÀY có trạng thái là MỚI
         [HttpGet("ds-giay-moi")]
         public IActionResult GetListShoesHaveStatusNew([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -61,7 +61,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY có trạng thái là HOT
+        // Trả về Json danh sách sản phẩm là loại GIÀY có trạng thái là HOT
         [HttpGet("ds-giay-hot")]
         public IActionResult GetListShoesHaveStatusHOT([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -84,7 +84,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY có trạng thái là KHUYEN_MAI
+        // Trả về Json danh sách sản phẩm là loại GIÀY có trạng thái là KHUYEN_MAI
         [HttpGet("ds-giay-khuyen_mai")]
         public IActionResult GetListShoesHaveStatusPromotional([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -107,7 +107,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY của hãng NIKE dành cho NAM
+        // Trả về Json danh sách sản phẩm là loại GIÀY của hãng NIKE dành cho NAM
         [HttpGet("ds-giay-nike-nam")]
         public IActionResult GetListShoesOfNikeForMen([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -132,7 +132,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY của hãng ADIDAS dành cho NAM
+        // Trả về Json danh sách sản phẩm là loại GIÀY của hãng ADIDAS dành cho NAM
         [HttpGet("ds-giay-adidas-nam")]
         public IActionResult GetListShoesOfAdidasForMen([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -157,7 +157,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY của hãng JORDAN dành cho NAM
+        // Trả về Json danh sách sản phẩm là loại GIÀY của hãng JORDAN dành cho NAM
         [HttpGet("ds-giay-jordan-nam")]
         public IActionResult GetListShoesOfJordanForMen([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -182,7 +182,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY của hãng NIKE dành cho NỮ
+        // Trả về Json danh sách sản phẩm là loại GIÀY của hãng NIKE dành cho NỮ
         [HttpGet("ds-giay-nike-nu")]
         public IActionResult GetListShoesOfNikeForWomen([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -207,7 +207,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY của hãng ADIDAS dành cho NỮ
+        // Trả về Json danh sách sản phẩm là loại GIÀY của hãng ADIDAS dành cho NỮ
         [HttpGet("ds-giay-adidas-nu")]
         public IActionResult GetListShoesOfAdidasForWomen([FromQuery] int page, [FromQuery] int pageSize)
         {
@@ -232,7 +232,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại GIÀY của hãng JORDAN dành cho NỮ
+        // Trả về Json danh sách sản phẩm là loại GIÀY của hãng JORDAN dành cho NỮ
         [HttpGet("ds-giay-jordan-nu")]
         public IActionResult GetListShoesOfJordanForWomen([FromQuery] int page, [FromQuery] int pageSize)
         {

@@ -90,7 +90,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                                            (p.id_status_product != (int)StatusProduct.KHONG_DUOC_BAN));
             }
 
-            var queryResult = baseQuery
+            var queryResult = baseQuery.OrderByDescending(p => p.time_created)
                               .Select(p => new
                               {
                                   p.id_product,
