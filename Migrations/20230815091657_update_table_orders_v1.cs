@@ -4,7 +4,7 @@
 
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
-    public partial class updata_tb_products : Migration
+    public partial class update_table_orders_v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

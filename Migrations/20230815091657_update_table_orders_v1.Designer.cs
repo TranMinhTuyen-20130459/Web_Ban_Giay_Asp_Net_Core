@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230807034522_update_table_products")]
-    partial class update_table_products
+    [Migration("20230815091657_update_table_orders_v1")]
+    partial class update_table_orders_v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -295,11 +295,18 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.OrderDetail", b =>
                 {
+                    b.Property<long>("id_order_detail")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
                     b.Property<long>("id_order")
                         .HasColumnType("bigint");
 
                     b.Property<long>("id_product")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("name_size")
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("price")
                         .HasColumnType("decimal(65,30)");
@@ -307,7 +314,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("id_order", "id_product");
+                    b.HasKey("id_order_detail");
+
+                    b.HasIndex("id_order");
 
                     b.HasIndex("id_product");
 
@@ -338,6 +347,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
                     b.Property<int>("id_brand")
                         .HasColumnType("int");
+
+                    b.Property<byte>("id_sex")
+                        .HasColumnType("tinyint unsigned");
 
                     b.Property<int>("id_status_product")
                         .HasColumnType("int");
@@ -443,7 +455,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.HistoryPriceProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("list_price")
+                        .WithMany("list_history_price")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -471,7 +483,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .IsRequired();
 
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("order_details")
+                        .WithMany("list_order_detail")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -522,7 +534,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.SizeProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("size_products")
+                        .WithMany("list_size")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -555,13 +567,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.Product", b =>
                 {
+                    b.Navigation("list_history_price");
+
                     b.Navigation("list_image");
 
-                    b.Navigation("list_price");
+                    b.Navigation("list_order_detail");
 
-                    b.Navigation("order_details");
-
-                    b.Navigation("size_products");
+                    b.Navigation("list_size");
                 });
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.Role", b =>

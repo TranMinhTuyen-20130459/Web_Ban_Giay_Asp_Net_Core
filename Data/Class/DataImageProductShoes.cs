@@ -6,7 +6,7 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 {
-    public class DataImageProduct : IAddData
+    public class DataImageProductShoes : IAddData
     {
         public static string[] arr_path_img = {
             "https://kingshoes.vn/data/upload/media/dv3854-600-giay-nike-pegasus-40-road-running-chinh-hang-gia-tot-den-king-shoes-12.jpeg"
@@ -50,7 +50,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
             {
                 try
                 {
-                    var list_id_product = DataUtil.GetListIdProduct(dbContext);
+                    var list_id_product = DataUtil.GetListIdProductByType(dbContext, (int)TypeProductEnum.GIAY);
                     foreach (var id_product in list_id_product)
                     {
                         // mỗi product sẽ có 3 image_product

@@ -11,8 +11,8 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230804040056_TableInit")]
-    partial class TableInit
+    [Migration("20230815092425_update_table_orders_v2")]
+    partial class update_table_orders_v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,134 +168,106 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_address")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_district_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_district_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_phone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_province_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_province_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_ward_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("from_ward_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("id_status_order")
                         .HasColumnType("int");
 
                     b.Property<string>("note")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("order_value")
+                    b.Property<decimal?>("order_value")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("return_address")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_district_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_phone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_province_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("return_ward_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("ship_price")
+                    b.Property<decimal?>("ship_price")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<DateTime>("time_order")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("time_updated")
+                    b.Property<DateTime?>("time_updated")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("to_address")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_district_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_district_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_phone")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_province_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_province_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_ward_id")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("to_ward_name")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("total_price")
+                    b.Property<decimal?>("total_price")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("id_order");
@@ -305,11 +277,18 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.OrderDetail", b =>
                 {
+                    b.Property<long>("id_order_detail")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
                     b.Property<long>("id_order")
                         .HasColumnType("bigint");
 
                     b.Property<long>("id_product")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("name_size")
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("price")
                         .HasColumnType("decimal(65,30)");
@@ -317,7 +296,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("id_order", "id_product");
+                    b.HasKey("id_order_detail");
+
+                    b.HasIndex("id_order");
 
                     b.HasIndex("id_product");
 
@@ -349,15 +330,24 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.Property<int>("id_brand")
                         .HasColumnType("int");
 
+                    b.Property<byte>("id_sex")
+                        .HasColumnType("tinyint unsigned");
+
                     b.Property<int>("id_status_product")
                         .HasColumnType("int");
 
                     b.Property<int>("id_type_product")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("listed_price")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<string>("name_product")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<decimal>("promotional_price")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<int>("star_review")
                         .HasColumnType("int");
@@ -447,7 +437,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.HistoryPriceProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("list_price")
+                        .WithMany("list_history_price")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -458,7 +448,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.ImageProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("images")
+                        .WithMany("list_image")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -475,7 +465,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .IsRequired();
 
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("order_details")
+                        .WithMany("list_order_detail")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -526,7 +516,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.SizeProduct", b =>
                 {
                     b.HasOne("Web_Ban_Giay_Asp_Net_Core.Entities.Product", "product")
-                        .WithMany("size_products")
+                        .WithMany("list_size")
                         .HasForeignKey("id_product")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -559,13 +549,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.Product", b =>
                 {
-                    b.Navigation("images");
+                    b.Navigation("list_history_price");
 
-                    b.Navigation("list_price");
+                    b.Navigation("list_image");
 
-                    b.Navigation("order_details");
+                    b.Navigation("list_order_detail");
 
-                    b.Navigation("size_products");
+                    b.Navigation("list_size");
                 });
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.Role", b =>

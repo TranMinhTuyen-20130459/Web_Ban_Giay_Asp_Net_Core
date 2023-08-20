@@ -1,6 +1,6 @@
 ﻿namespace Web_Ban_Giay_Asp_Net_Core.Models
 {
-    public class ProductModel_Part2
+    public class ProductModel_Ver2
     {
         public long id_product { get; set; }
 
