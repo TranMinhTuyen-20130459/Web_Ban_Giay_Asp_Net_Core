@@ -16,6 +16,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _orderRepository = orderRepository;
         }
 
+        // tạo mới một đơn hàng
         [HttpPost("create-order")]
         public IActionResult CreateOrder([FromBody] OrderModel orderModel)
         {
@@ -54,6 +55,27 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                     error_message = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
+            }
+        }
+
+        // lấy ra chi tiết đơn hàng theo id đơn hàng 
+        [HttpGet("infor-order")]
+        public IActionResult GetOrderDetailByIdOrder([FromQuery] long id_order)
+        {
+            try
+            {
+                if (id_order < 1) return BadRequest();
+
+                var data = _orderRepository.GetOrderDetailByIdOrder(id_order);
+
+                if (data == null) return NotFound();
+
+                return Ok(new Response<HistoryOrderDetailModel>(data));
+
+            }
+            catch
+            {
+                return StatusCode(500);
             }
         }
     }

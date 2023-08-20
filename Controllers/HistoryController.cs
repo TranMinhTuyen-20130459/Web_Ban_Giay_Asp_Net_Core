@@ -7,11 +7,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
     [Route("api/history/")]
     [ApiController]
-    public class HistoryOrderController : ControllerBase
+    public class HistoryController : ControllerBase
     {
         private readonly IHistoryOrderRepository _historyOrderRepository;
 
-        public HistoryOrderController(IHistoryOrderRepository historyOrderRepository)
+        public HistoryController(IHistoryOrderRepository historyOrderRepository)
         {
             _historyOrderRepository = historyOrderRepository;
         }
@@ -38,27 +38,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 
                 return Ok(new PagedResponse<List<HistoryOrderModel>>
                                             (pagedData, validFilter.current_page, validFilter.page_size, totalItems));
-
-            }
-            catch
-            {
-                return StatusCode(500);
-            }
-        }
-
-        // lấy ra chi tiết đơn hàng theo id đơn hàng 
-        [HttpGet("infor-order")]
-        public IActionResult GetOrderDetailByIdOrder([FromQuery] long id_order)
-        {
-            try
-            {
-                if (id_order < 1) return BadRequest();
-
-                var data = _historyOrderRepository.GetOrderDetailByIdOrder(id_order);
-
-                if (data == null) return NotFound();
-
-                return Ok(new Response<HistoryOrderDetailModel>(data));
 
             }
             catch

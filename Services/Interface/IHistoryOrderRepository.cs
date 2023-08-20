@@ -10,7 +10,5 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Interface
         // lấy ra số lượng đơn hàng đã mua theo số điện thoại
         int GetOrderCountByPhoneNumber(string phoneNumber);
 
-        // lấy ra chi tiết đơn hàng theo id đơn hàng 
-        HistoryOrderDetailModel GetOrderDetailByIdOrder(long id_order);
     }
 }
