@@ -8,6 +8,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Models
         [Required(ErrorMessage = "Customer name is required.")]
         public string name_customer { get; set; }
 
+        [Required]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be 10 digits.")]
         public string phone { get; set; }
 
