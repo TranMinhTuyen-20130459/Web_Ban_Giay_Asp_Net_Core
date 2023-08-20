@@ -17,7 +17,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _productRepository = productRepository;
         }
 
-        // Lấy danh sách sản phẩm là ĐỒ THỂ THAO có tên liên quan đến từ khóa do user nhập vào 
+        // Trả về Json danh sách sản phẩm là ĐỒ THỂ THAO có tên liên quan đến từ khóa do user nhập vào 
         [HttpGet("ds-do-the-thao")]
         public IActionResult GetListSportsWearByName([FromQuery] string name, [FromQuery] int quantity)
         {
@@ -38,9 +38,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại ĐỒ THỂ THAO có trạng thái là MỚI
+        // Trả về Json danh sách sản phẩm là loại ĐỒ THỂ THAO có trạng thái là MỚI
         [HttpGet("ds-do-the-thao-moi")]
-
         public IActionResult GetListSportsWearHaveStatusNew([FromQuery] int page, [FromQuery] int pageSize)
         {
             try
@@ -62,9 +61,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm là loại ĐỒ THỂ THAO có trạng thái là HOT
+        // Trả về Json danh sách sản phẩm là loại ĐỒ THỂ THAO có trạng thái là HOT
         [HttpGet("ds-do-the-thao-hot")]
-
         public IActionResult GetListSportsWearHaveStatusHOT([FromQuery] int page, [FromQuery] int pageSize)
         {
             try
@@ -86,10 +84,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-
-        // Lấy danh sách sản phẩm là loại ĐỒ THỂ THAO có trạng thái là KHUYEN_MAI
+        // Trả về Json danh sách sản phẩm là loại ĐỒ THỂ THAO có trạng thái là KHUYEN_MAI
         [HttpGet("ds-do-the-thao-khuyen_mai")]
-
         public IActionResult GetListSportsWearHaveStatusPromotional([FromQuery] int page, [FromQuery] int pageSize)
         {
             try
@@ -110,7 +106,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 return StatusCode(500);
             }
         }
-
 
     }
 }

@@ -7,7 +7,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Interface
         // tạo đơn hàng mới rồi trả về id của đơn hàng được tạo
         long? CreateOrder(OrderModel orderModel);
 
-        // lấy ra thông tin chi tiết đơn hàng theo id đơn hàng 
+        // lấy ra thông tin chi tiết đơn hàng theo id đơn hàng rồi trả về model
         HistoryOrderDetailModel GetOrderDetailByIdOrder(long id_order);
     }
 }

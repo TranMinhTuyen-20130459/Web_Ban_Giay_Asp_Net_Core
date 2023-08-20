@@ -16,7 +16,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _historyOrderRepository = historyOrderRepository;
         }
 
-        // Lấy ra danh sách đơn hàng được mua bởi số điện thoại (có phân trang)
+        // Trả về chuỗi Json danh sách đơn hàng được mua bởi số điện thoại (có phân trang)
         [HttpGet("lich-su-mua-hang")]
         public IActionResult GetListOrderByPhoneNumber([FromQuery] string phoneNumber, [FromQuery] int page, [FromQuery] int pageSize)
         {

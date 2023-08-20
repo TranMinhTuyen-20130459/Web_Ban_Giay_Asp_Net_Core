@@ -17,7 +17,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             _productRepository = productRepository;
         }
 
-        // Lấy thông tin sản phẩm theo id
+        // Trả về Json thông tin chi tiết sản phẩm
         [HttpGet("infor-product")]
         public IActionResult GetProductById([FromQuery] long id)
         {
@@ -39,7 +39,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             }
         }
 
-        // Lấy danh sách sản phẩm có tên liên quan đến từ khóa do user nhập vào 
+        // Trả về Json danh sách sản phẩm có tên liên quan đến từ khóa do user nhập vào 
         [HttpGet("ds-san-pham")]
         public IActionResult GetListProductByName([FromQuery] string name, [FromQuery] int quantity)
         {
