@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Entities
@@ -58,5 +59,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
 
         [Range(1, 3, ErrorMessage = "id_sex must be >=1  AND <= 3")]
         public byte id_sex { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue("DateTime.Now")]
+        public DateTime time_created { get; set; }
     }
 }
