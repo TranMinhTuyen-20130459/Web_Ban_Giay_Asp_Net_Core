@@ -14,6 +14,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
 
         public DbSet<Admin> Admins { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
         public DbSet<Brand> Brands { get; set; }
 
         public DbSet<HistoryPriceProduct> HistoryPriceProducts { get; set; }

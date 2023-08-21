@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
-    [Table("Admins")]
-    public class Admin
+    [Table("Users")]
+    public class User
     {
         [Key]
         public string email { get; set; }
@@ -25,6 +25,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
 
         public DateTime? time_updated { get; set; }
 
-        public ICollection<RoleDetail> role_details { get; set; }
     }
+
 }
