@@ -8,6 +8,10 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long id_user { get; set; }
+
+        [Required]
         public string email { get; set; }
 
         [Required]

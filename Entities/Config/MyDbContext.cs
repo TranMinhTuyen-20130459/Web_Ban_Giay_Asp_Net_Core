@@ -117,6 +117,18 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
                 .HasForeignKey(imgProduct => imgProduct.id_product)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // thiết lập constraint cho các thuộc tính của Admin
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.HasIndex(a => a.email).IsUnique();
+            });
+
+            // thiết lập constraint cho các thuộc tính của User
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(u => u.email).IsUnique();
+            });
+
         }
     }
 }
