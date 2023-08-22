@@ -1,4 +1,4 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Services.Util
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Models.Response
 {
     public class PagedResponse<T> : Response<T>
     {
@@ -11,7 +11,7 @@
         {
             this.current_page = current_page;
             this.page_size = page_size;
-            this.total_pages = (int)Math.Ceiling((double)total_items / (double)page_size);
+            total_pages = (int)Math.Ceiling(total_items / (double)page_size);
             this.total_items = total_items;
         }
     }

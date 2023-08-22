@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Web_Ban_Giay_Asp_Net_Core.Model;
 using Web_Ban_Giay_Asp_Net_Core.Models;
+using Web_Ban_Giay_Asp_Net_Core.Models.Response;
 using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-using Web_Ban_Giay_Asp_Net_Core.Services.Util;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
