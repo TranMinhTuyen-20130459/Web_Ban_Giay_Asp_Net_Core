@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
-    public enum StatusProduct
+    public enum StatusProductEnum
     {
         BINH_THUONG = 1,
         MOI = 2,

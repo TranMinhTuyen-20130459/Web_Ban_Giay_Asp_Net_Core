@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
-    public enum LevelLog
+    public enum LevelLogEnum
     {
         Infor = 1, Warning = 2, Error = 3, Alert = 4
     }
