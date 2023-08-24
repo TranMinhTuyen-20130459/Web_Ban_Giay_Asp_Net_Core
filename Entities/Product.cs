@@ -15,7 +15,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         KHONG_DUOC_BAN = 7
     }
 
-    public enum Sex
+    public enum SexEnum
     {
         NAM = 1,
         NU = 2
