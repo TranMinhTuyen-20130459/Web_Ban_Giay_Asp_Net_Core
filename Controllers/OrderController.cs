@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-using Web_Ban_Giay_Asp_Net_Core.Models.Response;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
     [Route("api/order/")]
     [ApiController]

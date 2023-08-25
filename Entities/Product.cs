@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Entities
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
     public enum StatusProductEnum
     {

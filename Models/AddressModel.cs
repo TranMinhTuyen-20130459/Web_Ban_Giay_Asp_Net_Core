@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace Web_Ban_Giay_Asp_Net_Core.Models
 {
     public class AddressModel

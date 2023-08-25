@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Helpers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Helpers
 {
     public class JwtMiddleware
     {

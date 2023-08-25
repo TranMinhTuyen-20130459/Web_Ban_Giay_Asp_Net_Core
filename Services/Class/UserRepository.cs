@@ -1,8 +1,4 @@
-﻿using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
 {
     public class UserRepository : IUserRepository
     {

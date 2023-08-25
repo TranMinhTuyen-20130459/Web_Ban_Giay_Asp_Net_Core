@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
 {
     public class MyDbContext : DbContext
     {

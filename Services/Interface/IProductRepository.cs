@@ -1,7 +1,4 @@
-﻿using Web_Ban_Giay_Asp_Net_Core.Model;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Services.Interface
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Services.Interface
 {
     public interface IProductRepository
     {

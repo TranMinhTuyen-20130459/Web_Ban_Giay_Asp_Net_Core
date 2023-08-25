@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
 using Web_Ban_Giay_Asp_Net_Core.Data.Interface;
 using Web_Ban_Giay_Asp_Net_Core.Data.Util;
-using Web_Ban_Giay_Asp_Net_Core.Entities;
-using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 {
@@ -24,7 +22,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                     {
 
                         // lấy ra ngẫu nhiên từ 1 đến 9 các id_product trong list_id_product
-                        var list_id_product_random = FunctionUtil
+                        var list_id_product_random = Util.FunctionUtil
                             .GetListElementRandom(list_id_product, random.Next(1, 10));
 
                         foreach (var id_product in list_id_product_random)
