@@ -10,6 +10,6 @@
     {
         public string access_token { get; set; }
         public string token_type { get; set; }
-        public long expires_in { get; set; } // => thời gian hiệu lực của access_token
+        public string expires_in { get; set; } // => thời gian hiệu lực của access_token
     }
 }

@@ -5,10 +5,12 @@
     public class AuthenticationController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly AppSettings _appSettings;
 
-        public AuthenticationController(IUserRepository userRepository)
+        public AuthenticationController(IUserRepository userRepository, IOptions<AppSettings> appSettings)
         {
             _userRepository = userRepository;
+            _appSettings = appSettings.Value;
         }
 
         [HttpPost("login-user")]
@@ -28,7 +30,7 @@
                     {
                         status = (int)HttpStatusCode.Unauthorized, // => lỗi 401
                         error_code = "-1",
-                        error_message = "Unauthorized"
+                        error_message = "Email or password is Invalid"
                     };
                     return StatusCode(401, errorResponse);
                 }
@@ -36,9 +38,9 @@
                 // <=> User có trong hệ thống
                 var loginResponse = new LoginResponse
                 {
-                    access_token = FunctionUtil.GenerateJwtToken(userModel),
+                    access_token = FunctionUtil.GenerateJwtToken(userModel, _appSettings),
                     token_type = TokenTypes.BEARER,
-                    expires_in = 600 // => thời gian hiệu lực của access_token
+                    expires_in = "3 minutes" // => thời gian hiệu lực của access_token
                 };
 
                 return Ok(loginResponse);
