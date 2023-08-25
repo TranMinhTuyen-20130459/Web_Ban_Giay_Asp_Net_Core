@@ -30,7 +30,7 @@
                     {
                         status = (int)HttpStatusCode.Unauthorized, // => lỗi 401
                         error_code = "-1",
-                        error_message = "Email or password is Invalid"
+                        error_message = "Email or password is incorrect"
                     };
                     return StatusCode(401, errorResponse);
                 }
