@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-using Web_Ban_Giay_Asp_Net_Core.Services.Util;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
     [Route("api/history/")]
     [ApiController]
@@ -17,6 +12,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         }
 
         // Trả về chuỗi Json danh sách đơn hàng được mua bởi số điện thoại (có phân trang)
+        [Authorize]
         [HttpGet("lich-su-mua-hang")]
         public IActionResult GetListOrderByPhoneNumber([FromQuery] string phoneNumber, [FromQuery] int page, [FromQuery] int pageSize)
         {

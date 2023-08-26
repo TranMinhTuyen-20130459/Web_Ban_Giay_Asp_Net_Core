@@ -1,10 +1,6 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Entities
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
-    public enum StatusProduct
+    public enum StatusProductEnum
     {
         BINH_THUONG = 1,
         MOI = 2,
@@ -15,7 +11,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities
         KHONG_DUOC_BAN = 7
     }
 
-    public enum Sex
+    public enum SexEnum
     {
         NAM = 1,
         NU = 2

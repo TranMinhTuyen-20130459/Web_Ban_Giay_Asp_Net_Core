@@ -1,4 +1,4 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Services.Util
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Models.Response
 {
     public class Response<T>
     {

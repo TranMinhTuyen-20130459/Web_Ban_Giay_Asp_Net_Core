@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
 {
     public class MyDbContext : DbContext
     {
@@ -13,6 +11,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
         });
 
         public DbSet<Admin> Admins { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Brand> Brands { get; set; }
 
@@ -114,6 +114,18 @@ namespace Web_Ban_Giay_Asp_Net_Core.Entities.Config
                 .WithMany(product => product.list_image)
                 .HasForeignKey(imgProduct => imgProduct.id_product)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // thiết lập constraint cho các thuộc tính của Admin
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.HasIndex(a => a.email).IsUnique();
+            });
+
+            // thiết lập constraint cho các thuộc tính của User
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(u => u.email).IsUnique();
+            });
 
         }
     }

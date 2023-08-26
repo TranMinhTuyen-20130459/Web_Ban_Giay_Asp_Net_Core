@@ -1,6 +1,4 @@
-﻿using Web_Ban_Giay_Asp_Net_Core.Models;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Model
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Models
 {
     public class ProductModel
     {

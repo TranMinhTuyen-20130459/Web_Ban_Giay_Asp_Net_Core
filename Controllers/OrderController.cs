@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-using Web_Ban_Giay_Asp_Net_Core.Services.Util;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
     [Route("api/order/")]
     [ApiController]
@@ -17,6 +12,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         }
 
         // Tạo mới một đơn hàng
+        [Authorize]
         [HttpPost("create-order")]
         public IActionResult CreateOrder([FromBody] OrderModel orderModel)
         {
@@ -59,6 +55,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
         }
 
         // Trả về chuỗi Json thông tin chi tiết của đơn hàng 
+        [Authorize]
         [HttpGet("infor-order")]
         public IActionResult GetOrderDetailByIdOrder([FromQuery] long id_order)
         {

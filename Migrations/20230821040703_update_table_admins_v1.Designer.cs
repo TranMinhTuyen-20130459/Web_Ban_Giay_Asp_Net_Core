@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
@@ -10,9 +11,10 @@ using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230821040703_update_table_admins_v1")]
+    partial class update_table_admins_v1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,12 +23,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.Admin", b =>
                 {
-                    b.Property<long>("id_admin")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
                     b.Property<string>("email")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("fullname")
@@ -40,19 +37,17 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("phone")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("time_created")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("time_updated")
+                    b.Property<DateTime>("time_updated")
                         .HasColumnType("datetime(6)");
 
-                    b.HasKey("id_admin");
-
-                    b.HasIndex("email")
-                        .IsUnique();
+                    b.HasKey("email");
 
                     b.ToTable("Admins");
                 });
@@ -388,8 +383,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.RoleDetail", b =>
                 {
-                    b.Property<long>("id_admin")
-                        .HasColumnType("bigint");
+                    b.Property<string>("id_admin")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("id_role")
                         .HasColumnType("int");
@@ -442,44 +437,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     b.HasKey("id_type");
 
                     b.ToTable("Type_Products");
-                });
-
-            modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.User", b =>
-                {
-                    b.Property<long>("id_user")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("fullname")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("path_img_avatar")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("phone")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("time_created")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("time_updated")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("id_user");
-
-                    b.HasIndex("email")
-                        .IsUnique();
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Web_Ban_Giay_Asp_Net_Core.Entities.HistoryPriceProduct", b =>

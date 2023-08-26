@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Web_Ban_Giay_Asp_Net_Core.Entities;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-using Web_Ban_Giay_Asp_Net_Core.Services.Util;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
     [Route("api/product-shoes/")]
     [ApiController]
@@ -46,11 +40,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             {
                 var validFilter = new PaginationFilter(page, pageSize);
 
-                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProduct.MOI, validFilter.current_page, validFilter.page_size);
+                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProductEnum.MOI, validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
 
-                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProduct.MOI);
+                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProductEnum.MOI);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -69,11 +63,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             {
                 var validFilter = new PaginationFilter(page, pageSize);
 
-                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProduct.HOT, validFilter.current_page, validFilter.page_size);
+                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProductEnum.HOT, validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
 
-                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProduct.HOT);
+                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProductEnum.HOT);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -92,11 +86,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             {
                 var validFilter = new PaginationFilter(page, pageSize);
 
-                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProduct.KHUYEN_MAI, validFilter.current_page, validFilter.page_size);
+                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProductEnum.KHUYEN_MAI, validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
 
-                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProduct.KHUYEN_MAI);
+                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.GIAY, (int)StatusProductEnum.KHUYEN_MAI);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -116,12 +110,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 var validFilter = new PaginationFilter(page, pageSize);
 
                 var pagedData = _productRepository
-                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NAM,
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)SexEnum.NAM,
                                 validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) return NotFound();
 
-                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NAM);
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)SexEnum.NAM);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -141,12 +135,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 var validFilter = new PaginationFilter(page, pageSize);
 
                 var pagedData = _productRepository
-                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NAM,
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)SexEnum.NAM,
                                 validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) return NotFound();
 
-                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NAM);
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)SexEnum.NAM);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -166,12 +160,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 var validFilter = new PaginationFilter(page, pageSize);
 
                 var pagedData = _productRepository
-                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NAM,
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)SexEnum.NAM,
                                 validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) return NotFound();
 
-                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NAM);
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)SexEnum.NAM);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -191,12 +185,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 var validFilter = new PaginationFilter(page, pageSize);
 
                 var pagedData = _productRepository
-                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NU,
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)SexEnum.NU,
                                 validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) return NotFound();
 
-                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)Sex.NU);
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.NIKE, (int)SexEnum.NU);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -216,12 +210,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 var validFilter = new PaginationFilter(page, pageSize);
 
                 var pagedData = _productRepository
-                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NU,
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)SexEnum.NU,
                                 validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) return NotFound();
 
-                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)Sex.NU);
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.ADIDAS, (int)SexEnum.NU);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -241,12 +235,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
                 var validFilter = new PaginationFilter(page, pageSize);
 
                 var pagedData = _productRepository
-                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NU,
+                                .GetListProductBy_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)SexEnum.NU,
                                 validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) return NotFound();
 
-                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)Sex.NU);
+                int totalItems = _productRepository.GetProductCountOf_TypeAndBrandAndSex((int)TypeProductEnum.GIAY, (int)BrandEnum.JORDAN, (int)SexEnum.NU);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 

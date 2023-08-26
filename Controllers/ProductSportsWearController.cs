@@ -1,10 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Web_Ban_Giay_Asp_Net_Core.Entities;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-using Web_Ban_Giay_Asp_Net_Core.Services.Util;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
 {
     [Route("api/product-sports-wear/")]
     [ApiController]
@@ -46,11 +40,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             {
                 var validFilter = new PaginationFilter(page, pageSize);
 
-                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.MOI, validFilter.current_page, validFilter.page_size);
+                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProductEnum.MOI, validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
 
-                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.MOI);
+                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProductEnum.MOI);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -69,11 +63,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             {
                 var validFilter = new PaginationFilter(page, pageSize);
 
-                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.HOT, validFilter.current_page, validFilter.page_size);
+                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProductEnum.HOT, validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
 
-                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.HOT);
+                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProductEnum.HOT);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 
@@ -92,11 +86,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers
             {
                 var validFilter = new PaginationFilter(page, pageSize);
 
-                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.KHUYEN_MAI, validFilter.current_page, validFilter.page_size);
+                var pagedData = _productRepository.GetListProductByTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProductEnum.KHUYEN_MAI, validFilter.current_page, validFilter.page_size);
 
                 if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
 
-                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProduct.KHUYEN_MAI);
+                var totalItems = _productRepository.GetProductCountOfTypeAndStatus((int)TypeProductEnum.DO_THE_THAO, (int)StatusProductEnum.KHUYEN_MAI);
 
                 return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
 

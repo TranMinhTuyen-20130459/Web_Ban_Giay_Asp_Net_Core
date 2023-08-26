@@ -1,7 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 using Web_Ban_Giay_Asp_Net_Core.Services.Class;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,9 +14,13 @@ builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+// configure strongly typed settings object
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IHistoryOrderRepository, HistoryOrderRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
@@ -31,6 +32,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Custom jwt auth middleware
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 

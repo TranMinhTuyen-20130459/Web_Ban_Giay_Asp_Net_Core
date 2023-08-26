@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Web_Ban_Giay_Asp_Net_Core.Entities;
-using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
-using Web_Ban_Giay_Asp_Net_Core.Models;
-using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
 {
     public class OrderRepository : IOrderRepository
     {
@@ -39,7 +33,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
                 order_value = orderModel.order_value,
                 total_price = orderModel.ship_price + orderModel.order_value,
 
-                id_status_order = (int)StatusOrder.CHO_XAC_NHAN
+                id_status_order = (int)StatusOrderEnum.CHO_XAC_NHAN
             };
 
             using (var transaction = _dbContext.Database.BeginTransaction())
