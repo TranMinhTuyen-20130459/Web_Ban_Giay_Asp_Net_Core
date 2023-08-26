@@ -12,6 +12,7 @@
         }
 
         // Tạo mới một đơn hàng
+        [Authorize]
         [HttpPost("create-order")]
         public IActionResult CreateOrder([FromBody] OrderModel orderModel)
         {
@@ -54,6 +55,7 @@
         }
 
         // Trả về chuỗi Json thông tin chi tiết của đơn hàng 
+        [Authorize]
         [HttpGet("infor-order")]
         public IActionResult GetOrderDetailByIdOrder([FromQuery] long id_order)
         {

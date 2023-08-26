@@ -13,7 +13,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Helpers
      */
     public class JwtMiddleware
     {
+        /*
+        * Một "Request delegate" thực chất là một phương thức (method) 
+        * hoặc một delegate (đối tượng delegate) mà được gọi khi một yêu cầu HTTP đến.
+        * Nó có thể thực hiện các tác vụ như xử lý yêu cầu, thêm thông tin vào yêu cầu, thực hiện logging, kiểm tra quyền truy cập, và nhiều tác vụ khác.
+        */
         private readonly RequestDelegate _next;
+
         private readonly AppSettings _appSettings;
 
         public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
@@ -33,7 +39,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Helpers
                 AttachUserToContext(context, userRepository, token);
 
             // Tiếp tục xử lý request
-            await _next(context);
+            await _next(context); // => gọi delegate tiếp theo trong pipeline
         }
 
         // Phương thức AttachUserToContext để đính kèm thông tin người dùng vào context
