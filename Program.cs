@@ -1,4 +1,4 @@
-using Web_Ban_Giay_Asp_Net_Core.Services.Class;
+﻿using Web_Ban_Giay_Asp_Net_Core.Services.Class;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,11 +8,21 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
     string connectionString = builder.Configuration.GetConnectionString("MySQL");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
+
+/*
+ * CORS là viết tắt của "Cross-Origin Resource Sharing" (Chia sẻ tài nguyên giữa các nguồn gốc khác nhau). Đây là một cơ chế trong trình duyệt web để cho phép các trang web ở một nguồn (domain) cụ thể yêu cầu tài nguyên từ một nguồn khác mà không gặp phải vấn đề về chính sách cùng nguồn (same-origin policy).
+ */
+builder.Services.AddCors(c => c.AddPolicy("MyCors", build =>
+{
+    // build.WithOrigins("http://localhost:3000", "https://anhdev.com");
+    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+}));
 
 // configure strongly typed settings object
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
@@ -37,6 +47,8 @@ app.UseHttpsRedirection();
 app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
+
+app.UseCors("MyCors");
 
 app.MapControllers();
 
