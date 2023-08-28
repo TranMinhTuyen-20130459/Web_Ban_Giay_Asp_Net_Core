@@ -1,6 +1,4 @@
-﻿using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
-
-namespace Web_Ban_Giay_Asp_Net_Core.Data.Interface
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Data.Interface
 {
     public interface IAddData
     {
