@@ -43,7 +43,7 @@
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            const string connectionString = "Server=MYSQL5049.site4now.net;Database=db_a9e283_tmt0101;user=a9e283_tmt0101;password=Tinhtuyen123;";
+            const string connectionString = "Server=MYSQL5049.site4now.net;Database=db_a9e283_tmt0101;User=a9e283_tmt0101;Password=Tinhtuyen123;";
 
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
