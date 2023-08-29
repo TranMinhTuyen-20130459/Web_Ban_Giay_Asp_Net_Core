@@ -17,22 +17,25 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 name: "Admins",
                 columns: table => new
                 {
-                    username = table.Column<string>(type: "varchar(255)", nullable: false)
+                    id_admin = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    email = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     password = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    fullname = table.Column<string>(type: "longtext", nullable: false)
+                    fullname = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    email = table.Column<string>(type: "longtext", nullable: false)
+                    phone = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    phone = table.Column<string>(type: "longtext", nullable: false)
+                    path_img_avatar = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    path_img_avatar = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    time_created = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    time_updated = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admins", x => x.username);
+                    table.PrimaryKey("PK_Admins", x => x.id_admin);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -84,23 +87,23 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 {
                     id_order = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    from_name = table.Column<string>(type: "longtext", nullable: false)
+                    from_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_phone = table.Column<string>(type: "longtext", nullable: false)
+                    from_phone = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_address = table.Column<string>(type: "longtext", nullable: false)
+                    from_address = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_ward_name = table.Column<string>(type: "longtext", nullable: false)
+                    from_ward_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_district_name = table.Column<string>(type: "longtext", nullable: false)
+                    from_district_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_province_name = table.Column<string>(type: "longtext", nullable: false)
+                    from_province_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_ward_id = table.Column<string>(type: "longtext", nullable: false)
+                    from_ward_id = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_district_id = table.Column<string>(type: "longtext", nullable: false)
+                    from_district_id = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    from_province_id = table.Column<string>(type: "longtext", nullable: false)
+                    from_province_id = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     return_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -122,29 +125,29 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     email_customer = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_name = table.Column<string>(type: "longtext", nullable: false)
+                    to_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_phone = table.Column<string>(type: "longtext", nullable: false)
+                    to_phone = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_address = table.Column<string>(type: "longtext", nullable: false)
+                    to_address = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_ward_name = table.Column<string>(type: "longtext", nullable: false)
+                    to_ward_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_district_name = table.Column<string>(type: "longtext", nullable: false)
+                    to_district_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_province_name = table.Column<string>(type: "longtext", nullable: false)
+                    to_province_name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_ward_id = table.Column<string>(type: "longtext", nullable: false)
+                    to_ward_id = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_district_id = table.Column<string>(type: "longtext", nullable: false)
+                    to_district_id = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    to_province_id = table.Column<string>(type: "longtext", nullable: false)
+                    to_province_id = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     note = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ship_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    order_value = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    total_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ship_price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
+                    order_value = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
+                    total_price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     time_order = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
                     time_updated = table.Column<DateTime>(type: "datetime(6)", nullable: true),
@@ -215,11 +218,36 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    id_user = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    email = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    password = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    fullname = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    phone = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    path_img_avatar = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    time_created = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn),
+                    time_updated = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.id_user);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Role_Details",
                 columns: table => new
                 {
-                    id_admin = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    id_admin = table.Column<long>(type: "bigint", nullable: false),
                     id_role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -229,7 +257,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         name: "FK_Role_Details_Admins_id_admin",
                         column: x => x.id_admin,
                         principalTable: "Admins",
-                        principalColumn: "username",
+                        principalColumn: "id_admin",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Role_Details_Roles_id_role",
@@ -254,7 +282,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                     promotional_price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     id_brand = table.Column<int>(type: "int", nullable: false),
                     id_type_product = table.Column<int>(type: "int", nullable: false),
-                    id_sex = table.Column<byte>(type: "tinyint unsigned", nullable: false)
+                    id_sex = table.Column<byte>(type: "tinyint unsigned", nullable: false),
+                    time_created = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -330,7 +360,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     id_order = table.Column<long>(type: "bigint", nullable: false),
                     id_product = table.Column<long>(type: "bigint", nullable: false),
-                    name_size = table.Column<string>(type: "longtext", nullable: false)
+                    name_size = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     quantity = table.Column<int>(type: "int", nullable: false),
                     price = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
@@ -381,6 +411,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Admins_email",
+                table: "Admins",
+                column: "email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_History_Price_Products_id_product",
                 table: "History_Price_Products",
                 column: "id_product");
@@ -419,6 +455,12 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                 name: "IX_Size_Products_name_size",
                 table: "Size_Products",
                 column: "name_size");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_email",
+                table: "Users",
+                column: "email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -443,6 +485,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "Size_Products");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Orders");

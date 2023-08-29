@@ -3,9 +3,12 @@ using Web_Ban_Giay_Asp_Net_Core.Data.Interface;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 {
-    public class DataSize : IAddData
+    public class DataUser : IAddData
     {
-        public string[] arr_size = { "36", "37", "38", "39", "40", "41", "42", "43", "44" };
+
+        public string[] arr_email = { "test@gmail.com" };
+        public string[] arr_password = { "k46-it-nlu" };
+
         public void AddDataToTable(MyDbContext dbContext)
         {
             Stopwatch watch = new Stopwatch();
@@ -15,12 +18,17 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
             {
                 try
                 {
-                    foreach (var item in arr_size)
+                    for (int i = 0; i < arr_email.Length; i++)
                     {
-                        var size = new Size { name_size = item };
-                        dbContext.Sizes.Add(size);
-                        dbContext.SaveChanges();
+                        var user = new User
+                        {
+                            email = arr_email[i],
+                            password = arr_password[i]
+                        };
+
+                        dbContext.Users.Add(user);
                     }
+                    dbContext.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception e)
@@ -29,9 +37,9 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                     Console.WriteLine(e.Message);
                 }
             }
+
             watch.Stop();
-            TimeSpan time = watch.Elapsed;
-            Console.WriteLine("Excute time: " + time.TotalSeconds + " s");
+            Console.WriteLine("Execute time " + watch.Elapsed.TotalSeconds + " s");
         }
     }
 }
