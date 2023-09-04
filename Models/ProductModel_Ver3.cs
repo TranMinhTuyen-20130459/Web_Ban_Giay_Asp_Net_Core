@@ -34,11 +34,11 @@
         public int id_brand { get; set; }
 
         [Required(ErrorMessage = "Sex ID is required")]
-        [Range(1, int.MaxValue, ErrorMessage = "Sex ID must be >= 1")]
+        [Range(1, 2, ErrorMessage = "Sex ID must be >0 And <3")]
         public byte id_sex { get; set; }
 
         [Required(ErrorMessage = "Status Product ID is required")]
-        [Range(1, int.MaxValue, ErrorMessage = "Status Product ID must be >= 1")]
+        [Range(1, 7, ErrorMessage = "Status Product ID must be >0 AND <8")]
         public int id_status_product { get; set; }
     }
 
