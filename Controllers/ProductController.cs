@@ -57,5 +57,36 @@
 
         }
 
+        // Thêm một sản phẩm vào hệ thống và trả về id của sản phẩm được thêm
+        //[Authorize]
+        [HttpPost("create-product")]
+        public IActionResult CreateProduct(ProductModel_Ver3 productModel)
+        {
+            var errorResponse = new ErrorResponse
+            {
+                status = 500,
+                error_code = "-2",
+                error_message = "Error From Server"
+            };
+
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(productModel);
+
+                var id_product = _productRepository.CreateProduct(productModel);
+
+                if (id_product == null)
+                {
+                    return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống do lỗi từ Server
+                }
+
+                return StatusCode(201, new { id_product }); // thêm sản phẩm thành công vào hệ thống
+            }
+            catch
+            {
+
+                return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống do lỗi từ Server
+            }
+        }
     }
 }

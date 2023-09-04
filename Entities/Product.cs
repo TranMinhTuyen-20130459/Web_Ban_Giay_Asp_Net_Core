@@ -48,10 +48,10 @@
         public ICollection<OrderDetail> list_order_detail { get; set; }
 
         [ForeignKey("id_brand")]
-        public Brand brand { get; set; }
+        public Brand? brand { get; set; }
 
         [ForeignKey("id_type_product")]
-        public TypeProduct type_product { get; set; }
+        public TypeProduct? type_product { get; set; }
 
         [Range(1, 3, ErrorMessage = "id_sex must be >=1  AND <= 3")]
         public byte id_sex { get; set; }
