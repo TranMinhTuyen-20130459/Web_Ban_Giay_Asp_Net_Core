@@ -12,5 +12,9 @@
 
         public long id_product { get; set; }
         public Product product { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DefaultValue("DateTime.Now")]
+        public DateTime time_created { get; set; }
     }
 }

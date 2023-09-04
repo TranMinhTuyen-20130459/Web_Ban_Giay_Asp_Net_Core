@@ -13,5 +13,7 @@
         List<ProductModel_Ver2> GetListProductBy_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex, int page, int pageSize);
 
         int GetProductCountOf_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex);
+
+        long? CreateProduct(ProductModel_Ver3 productModel);
     }
 }

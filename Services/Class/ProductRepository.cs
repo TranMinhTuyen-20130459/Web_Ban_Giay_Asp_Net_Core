@@ -251,6 +251,85 @@
 
             return queryResult.Count();
         }
+
+        public long? CreateProduct(ProductModel_Ver3 productModel)
+        {
+            /*
+             * - Thêm sản phẩm vào bảng products
+             * - Thêm ds hình ảnh sản phẩm vào bảng image_products
+             * - Thêm ds size sản phẩm vào bảng size_products
+             * - Thêm giá của sản phẩm vào bảng history_price_products
+             */
+
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var productEntity = new Product
+                    {
+                        name_product = productModel.name_product,
+                        star_review = productModel.start_review,
+                        listed_price = productModel.listed_price,
+                        promotional_price = productModel.promotional_price,
+                        // Tìm đối tượng TypeProduct tương ứng với id_type
+                        type_product = _dbContext.TypeProducts.Find(productModel.id_type),
+                        // Tìm đối tượng Brand tương ứng với id_brand
+                        brand = _dbContext.Brands.Find(productModel.id_brand),
+                        id_sex = productModel.id_sex,
+                        id_status_product = productModel.id_status_product
+                    };
+
+                    // thêm sản phẩm vào bảng products
+                    _dbContext.Products.Add(productEntity);
+                    _dbContext.SaveChanges();
+
+                    long id_product = productEntity.id_product;
+
+                    // thêm ds hình ảnh sản phẩm vào bảng image_products
+                    foreach (var imgProductModel in productModel.list_image)
+                    {
+                        var imgProductEntity = new ImageProduct
+                        {
+                            path = imgProductModel.path_image,
+                            id_product = id_product
+                        };
+                        _dbContext.ImageProducts.Add(imgProductEntity);
+                    }
+
+                    // thêm ds size của sản phẩm vào bảng size_products
+                    foreach (var sizeProductModel in productModel.list_size)
+                    {
+                        var sizeProductEntity = new SizeProduct
+                        {
+                            id_product = id_product,
+                            name_size = sizeProductModel.name_size,
+                            quantity_available = sizeProductModel.quantity_available
+                        };
+                        _dbContext.SizeProducts.Add(sizeProductEntity);
+                    }
+
+                    // thêm giá của sản phẩm vào bảng history_price_products
+                    var historyPriceProductEntity = new HistoryPriceProduct
+                    {
+                        id_product = id_product,
+                        listed_price = productModel.listed_price,
+                        promotional_price = productModel.promotional_price,
+                        time_start = DateTime.Now
+                    };
+                    _dbContext.HistoryPriceProducts.Add(historyPriceProductEntity);
+
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+
+                    return id_product;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return null;
+                }
+            }
+        }
     }
 }
 
