@@ -2,32 +2,44 @@
 {
     public class ProductModel_Ver3
     {
-        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
-        [StringLength(100, ErrorMessage = "Tên sản phẩm không được vượt quá 100 ký tự")]
+        [Required(ErrorMessage = "Product Name is required")]
+        [StringLength(100, ErrorMessage = "Product Name cannot exceed 100 characters")]
         public string name_product { get; set; }
 
-        [Range(4, 5, ErrorMessage = "Điểm đánh giá phải nằm trong khoảng từ 4 đến 5")]
+        [Range(4, 5, ErrorMessage = "Review Score must be between 4 and 5")]
         public int start_review { get; set; }
 
-        [Range(0, double.MaxValue, ErrorMessage = "Giá niêm yết không được nhỏ hơn 0")]
+        [Required(ErrorMessage = "Listed price is required")]
+        [Range(0, double.MaxValue, ErrorMessage = "Listed price must be >=0")]
         public decimal listed_price { get; set; }
 
-        [Range(0, double.MaxValue, ErrorMessage = "Giá khuyến mãi không được nhỏ hơn 0")]
+        [Required(ErrorMessage = "Promotional price is required")]
+        [Range(0, double.MaxValue, ErrorMessage = "Promotional price must be >=0")]
         public decimal promotional_price { get; set; }
 
-        [Required(ErrorMessage = "Danh sách ảnh sản phẩm không được để trống")]
+        [Required(ErrorMessage = "List Image Product cannot be empty")]
+        [MinLength(1, ErrorMessage = "List Image Product must contain at least one element")]
         public List<ImageProductModel_Ver2> list_image { get; set; }
 
-        [Required(ErrorMessage = "Danh sách kích thước không được để trống")]
+        [Required(ErrorMessage = "List Size Product cannot be empty")]
+        [MinLength(1, ErrorMessage = "List Size Product must contain at least one element")]
         public List<SizeProductModel> list_size { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "ID loại phải >=1")]
+        [Required(ErrorMessage = "Type ID is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Type ID must be >= 1")]
         public int id_type { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "ID thương hiệu phải >=1")]
+        [Required(ErrorMessage = "Brand ID is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Brand ID must be >= 1")]
         public int id_brand { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "ID giới tính phải >=1")]
+        [Required(ErrorMessage = "Sex ID is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Sex ID must be >= 1")]
         public byte id_sex { get; set; }
+
+        [Required(ErrorMessage = "Status Product ID is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Status Product ID must be >= 1")]
+        public int id_status_product { get; set; }
     }
+
 }

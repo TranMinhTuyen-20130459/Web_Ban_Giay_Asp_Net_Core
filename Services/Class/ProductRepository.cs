@@ -275,14 +275,17 @@
                         type_product = _dbContext.TypeProducts.Find(productModel.id_type),
                         // Tìm đối tượng Brand tương ứng với id_brand
                         brand = _dbContext.Brands.Find(productModel.id_brand),
-                        id_sex = productModel.id_sex
+                        id_sex = productModel.id_sex,
+                        id_status_product = productModel.id_status_product
                     };
 
+                    // thêm sản phẩm vào bảng products
                     _dbContext.Products.Add(productEntity);
                     _dbContext.SaveChanges();
 
                     long id_product = productEntity.id_product;
 
+                    // thêm ds hình ảnh sản phẩm vào bảng image_products
                     foreach (var imgProductModel in productModel.list_image)
                     {
                         var imgProductEntity = new ImageProduct
@@ -293,6 +296,7 @@
                         _dbContext.ImageProducts.Add(imgProductEntity);
                     }
 
+                    // thêm ds size của sản phẩm vào bảng size_products
                     foreach (var sizeProductModel in productModel.list_size)
                     {
                         var sizeProductEntity = new SizeProduct
@@ -304,6 +308,7 @@
                         _dbContext.SizeProducts.Add(sizeProductEntity);
                     }
 
+                    // thêm giá của sản phẩm vào bảng history_price_products
                     var historyPriceProductEntity = new HistoryPriceProduct
                     {
                         id_product = id_product,

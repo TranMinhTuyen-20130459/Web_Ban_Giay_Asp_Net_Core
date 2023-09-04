@@ -58,16 +58,10 @@
         }
 
         // Thêm một sản phẩm vào hệ thống và trả về id của sản phẩm được thêm
-        //[Authorize]
+        [Authorize]
         [HttpPost("create-product")]
-        public IActionResult CreateProduct(ProductModel_Ver3 productModel)
+        public IActionResult CreateProduct([FromBody] ProductModel_Ver3 productModel)
         {
-            var errorResponse = new ErrorResponse
-            {
-                status = 500,
-                error_code = "-2",
-                error_message = "Error From Server"
-            };
 
             try
             {
@@ -77,13 +71,27 @@
 
                 if (id_product == null)
                 {
-                    return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống do lỗi từ Server
+                    var errorResponse = new ErrorResponse
+                    {
+                        status = 500,
+                        error_code = "-1",
+                        error_message = "Id Product is null"
+                    };
+
+                    return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống
                 }
 
                 return StatusCode(201, new { id_product }); // thêm sản phẩm thành công vào hệ thống
             }
             catch
             {
+
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
 
                 return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống do lỗi từ Server
             }
