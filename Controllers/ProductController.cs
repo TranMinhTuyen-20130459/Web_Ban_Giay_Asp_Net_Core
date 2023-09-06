@@ -98,6 +98,7 @@
         }
 
         // Cập nhật thông tin của sản phẩm và trả về kết quả true or false
+        [Authorize]
         [HttpPut("update-product")]
         public IActionResult UpdateProduct([FromBody] ProductModel_Ver4 productModel)
         {
