@@ -40,11 +40,13 @@
 
         public DbSet<TypeProduct> TypeProducts { get; set; }
 
+        public DbSet<HistoryUpdateProduct> HistoryUpdateProducts { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            const string connectionString = "Server=MYSQL5049.site4now.net;Database=db_a9e283_tmt0101;User=a9e283_tmt0101;Password=Tinhtuyen123;";
-            //const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
+            //const string connectionString = "Server=MYSQL5049.site4now.net;Database=db_a9e283_tmt0101;User=a9e283_tmt0101;Password=Tinhtuyen123;";
+            const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
@@ -126,6 +128,13 @@
             {
                 entity.HasIndex(u => u.email).IsUnique();
             });
+
+            // Cấu hình khóa ngoại giữa HistoryUpdateProduct và Product
+            modelBuilder.Entity<HistoryUpdateProduct>()
+                 .HasOne(h_u_p => h_u_p.product)
+                 .WithMany(p => p.list_history_update)
+                 .HasForeignKey(h_u_p => h_u_p.id_product)
+                 .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

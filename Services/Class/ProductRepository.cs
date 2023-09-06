@@ -268,7 +268,7 @@
                     var productEntity = new Product
                     {
                         name_product = productModel.name_product,
-                        star_review = productModel.start_review,
+                        star_review = productModel.star_review,
                         listed_price = productModel.listed_price,
                         promotional_price = productModel.promotional_price,
                         // Tìm đối tượng TypeProduct tương ứng với id_type

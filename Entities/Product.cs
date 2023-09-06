@@ -59,5 +59,7 @@
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [DefaultValue("DateTime.Now")]
         public DateTime time_created { get; set; }
+
+        public ICollection<HistoryUpdateProduct> list_history_update { get; }
     }
 }
