@@ -40,6 +40,8 @@
 
         public DbSet<TypeProduct> TypeProducts { get; set; }
 
+        public DbSet<HistoryUpdateProduct> HistoryUpdateProducts { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -126,6 +128,13 @@
             {
                 entity.HasIndex(u => u.email).IsUnique();
             });
+
+            // Cấu hình khóa ngoại giữa HistoryUpdateProduct và Product
+            modelBuilder.Entity<HistoryUpdateProduct>()
+                 .HasOne(h_u_p => h_u_p.product)
+                 .WithMany(p => p.list_history_update)
+                 .HasForeignKey(h_u_p => h_u_p.id_product)
+                 .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

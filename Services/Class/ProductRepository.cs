@@ -268,7 +268,7 @@
                     var productEntity = new Product
                     {
                         name_product = productModel.name_product,
-                        star_review = productModel.start_review,
+                        star_review = productModel.star_review,
                         listed_price = productModel.listed_price,
                         promotional_price = productModel.promotional_price,
                         // Tìm đối tượng TypeProduct tương ứng với id_type
@@ -330,6 +330,91 @@
                 }
             }
         }
+
+        public bool UpdateProduct(ProductModel_Ver4 productModel)
+        {
+            /*
+             * cập nhật lại các field trong bảng products
+             * thêm bản ghi vào bảng history_price_products nếu giá thay đổi
+             * thêm bản ghi vào bảng history_update_products
+             */
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var productEntity = _dbContext.Products
+                                                   .Include(p => p.list_history_price)
+                                                   .Include(p => p.list_history_update)
+                                                   .Include(p => p.type_product)
+                                                   .Include(p => p.brand)
+                                                   .SingleOrDefault(p => p.id_product == productModel.id_product);
+
+                    if (productEntity == null)
+                    {
+                        // Không tìm thấy sản phẩm với ID đã cung cấp
+                        return false;
+                    }
+
+                    // Kiểm tra xem có sự thay đổi trong giá sản phẩm
+                    if (productEntity.listed_price != productModel.listed_price ||
+                        productEntity.promotional_price != productModel.promotional_price)
+                    {
+                        // Cập nhật giá trước khi thêm lịch sử giá
+                        productEntity.listed_price = productModel.listed_price;
+                        productEntity.promotional_price = productModel.promotional_price;
+
+                        // Thêm một bản ghi mới vào bảng history_price_products
+                        var historyPrice = new HistoryPriceProduct
+                        {
+                            id_product = productModel.id_product,
+                            listed_price = productModel.listed_price,
+                            promotional_price = productModel.promotional_price,
+                            time_start = DateTime.Now
+                        };
+                        _dbContext.HistoryPriceProducts.Add(historyPrice);
+                    }
+
+                    productEntity.name_product = productModel.name_product;
+                    productEntity.star_review = productModel.star_review;
+                    productEntity.id_sex = productModel.id_sex;
+                    productEntity.id_status_product = productModel.id_status_product;
+
+                    // Lấy lại thông tin TypeProduct và Brand từ cơ sở dữ liệu dựa trên id_type và id_brand
+                    var typeProduct = _dbContext.TypeProducts.SingleOrDefault(t => t.id_type == productModel.id_type);
+                    var brand = _dbContext.Brands.SingleOrDefault(b => b.id_brand == productModel.id_brand);
+
+                    if (typeProduct != null)
+                    {
+                        productEntity.type_product = typeProduct;
+                    }
+
+                    if (brand != null)
+                    {
+                        productEntity.brand = brand;
+                    }
+
+                    // thêm một bản ghi mới vào bảng history_update_products
+                    var historyUpdate = new HistoryUpdateProduct
+                    {
+                        id_product = productModel.id_product,
+                        time_updated = DateTime.Now
+                    };
+                    _dbContext.HistoryUpdateProducts.Add(historyUpdate);
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+
+                    return true;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+        }
+
     }
 }
 

@@ -15,5 +15,7 @@
         int GetProductCountOf_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex);
 
         long? CreateProduct(ProductModel_Ver3 productModel);
+
+        bool UpdateProduct(ProductModel_Ver4 productModel);
     }
 }

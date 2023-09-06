@@ -96,5 +96,31 @@
                 return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống do lỗi từ Server
             }
         }
+
+        // Cập nhật thông tin của sản phẩm và trả về kết quả true or false
+        [Authorize]
+        [HttpPut("update-product")]
+        public IActionResult UpdateProduct([FromBody] ProductModel_Ver4 productModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid) { return BadRequest(productModel); }
+
+                var checkUpdate = _productRepository.UpdateProduct(productModel);
+
+                return Ok(new { status_update = checkUpdate });
+
+            }
+            catch
+            {
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
+            }
+        }
     }
 }
