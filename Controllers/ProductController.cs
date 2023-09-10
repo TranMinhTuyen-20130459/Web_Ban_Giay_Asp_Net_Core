@@ -124,6 +124,7 @@
         }
 
         // Cập nhật sản phẩm thành trạng thái KHONG_DUOC_BAN trong hệ thống
+        [Authorize]
         [HttpDelete("delete-product")]
         public IActionResult DeleteProduct([FromBody] ProductModel_Ver5 productModel)
         {
