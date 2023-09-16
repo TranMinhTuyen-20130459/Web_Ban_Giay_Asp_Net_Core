@@ -415,6 +415,29 @@
             }
         }
 
+        public bool DeleteProduct(ProductModel_Ver5 productModel)
+        {
+            //=> Cập nhật trạng thái của sản phẩm thành KHONG_DUOC_BAN
+            try
+            {
+                var productEntity = _dbContext.Products.Find(productModel.id_product);//=> lấy ra sản phẩm dựa vào khóa chính (id_product)
+                if (productEntity == null)
+                {
+                    // Không tìm thấy sản phẩm với ID đã cung cấp
+                    return false;
+                }
+
+                productEntity.id_status_product = (int)StatusProductEnum.KHONG_DUOC_BAN;
+                _dbContext.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
     }
 }
 

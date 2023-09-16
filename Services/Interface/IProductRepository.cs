@@ -17,5 +17,7 @@
         long? CreateProduct(ProductModel_Ver3 productModel);
 
         bool UpdateProduct(ProductModel_Ver4 productModel);
+
+        bool DeleteProduct(ProductModel_Ver5 productModel);
     }
 }

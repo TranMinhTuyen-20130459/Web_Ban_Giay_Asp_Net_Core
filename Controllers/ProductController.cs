@@ -122,5 +122,30 @@
                 return StatusCode(500, errorResponse);
             }
         }
+
+        // Cập nhật sản phẩm thành trạng thái KHONG_DUOC_BAN trong hệ thống
+        [Authorize]
+        [HttpDelete("delete-product")]
+        public IActionResult DeleteProduct([FromBody] ProductModel_Ver5 productModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid) { return BadRequest(productModel); }
+
+                var checkDelete = _productRepository.DeleteProduct(productModel);
+
+                return Ok(new { status_delete = checkDelete });
+            }
+            catch
+            {
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
+            }
+        }
     }
 }
