@@ -12,7 +12,7 @@
         }
 
         // Tạo mới một đơn hàng
-        [Authorize]
+        // [Authorize]
         [HttpPost("create-order")]
         public IActionResult CreateOrder([FromBody] OrderModel orderModel)
         {

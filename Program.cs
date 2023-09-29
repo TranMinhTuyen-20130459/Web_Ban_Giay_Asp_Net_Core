@@ -21,7 +21,9 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 builder.Services.AddCors(c => c.AddPolicy("MyCors", build =>
 {
     // build.WithOrigins("http://localhost:3000", "https://anhdev.com");
-    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    build.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
 }));
 
 // configure strongly typed settings object
@@ -51,9 +53,11 @@ app.UseHttpsRedirection();
 // Custom jwt auth middleware
 app.UseMiddleware<JwtMiddleware>();
 
-app.UseAuthorization();
+app.UseRouting();
 
 app.UseCors("MyCors");
+
+app.UseAuthorization();
 
 app.MapControllers();
 

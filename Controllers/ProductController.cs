@@ -58,7 +58,7 @@
         }
 
         // Thêm một sản phẩm vào hệ thống và trả về id của sản phẩm được thêm
-        [Authorize]
+        // [Authorize]
         [HttpPost("create-product")]
         public IActionResult CreateProduct([FromBody] ProductModel_Ver3 productModel)
         {
@@ -98,7 +98,7 @@
         }
 
         // Cập nhật thông tin của sản phẩm và trả về kết quả true or false
-        [Authorize]
+        // [Authorize]
         [HttpPut("update-product")]
         public IActionResult UpdateProduct([FromBody] ProductModel_Ver4 productModel)
         {
@@ -124,7 +124,7 @@
         }
 
         // Cập nhật sản phẩm thành trạng thái KHONG_DUOC_BAN trong hệ thống
-        [Authorize]
+        // [Authorize]
         [HttpDelete("delete-product")]
         public IActionResult DeleteProduct([FromBody] ProductModel_Ver5 productModel)
         {
