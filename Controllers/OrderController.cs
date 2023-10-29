@@ -55,7 +55,7 @@
         }
 
         // Trả về chuỗi Json thông tin chi tiết của đơn hàng 
-        [Authorize]
+        // [Authorize]
         [HttpGet("infor-order")]
         public IActionResult GetOrderDetailByIdOrder([FromQuery] long id_order)
         {
