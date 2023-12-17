@@ -335,6 +335,8 @@
         {
             /*
              * cập nhật lại các field trong bảng products
+             * cập nhật lại ds size của sản phẩm nếu list_size trong body Json không bằng null
+             * cập nhật lại ds image của sản phẩm nếu list_image trong body Json không bằng null 
              * thêm bản ghi vào bảng history_price_products nếu giá thay đổi
              * thêm bản ghi vào bảng history_update_products
              */
@@ -342,9 +344,14 @@
             {
                 try
                 {
+                    List<SizeProductModel>? list_size_model = productModel.list_size;
+                    List<ImageProductModel>? list_image_model = productModel.list_image;
+
                     var productEntity = _dbContext.Products
                                                    .Include(p => p.list_history_price)
                                                    .Include(p => p.list_history_update)
+                                                   .Include(p => p.list_image)
+                                                   .Include(p => p.list_size)
                                                    .Include(p => p.type_product)
                                                    .Include(p => p.brand)
                                                    .SingleOrDefault(p => p.id_product == productModel.id_product);
@@ -353,6 +360,28 @@
                     {
                         // Không tìm thấy sản phẩm với ID đã cung cấp
                         return false;
+                    }
+
+                    // Cập nhật ds size của sản phẩm 
+                    if (list_size_model != null && list_size_model.Count > 0)
+                    {
+                        productEntity.list_size = list_size_model.Select(size => new SizeProduct
+                        {
+                            id_product = productModel.id_product,
+                            name_size = size.name_size,
+                            quantity_available = size.quantity_available
+                        }).ToList();
+                    }
+
+                    // Cập nhật ds image của sản phẩm
+                    if (list_image_model != null && list_image_model.Count > 0)
+                    {
+                        productEntity.list_image = list_image_model.Select(img => new ImageProduct
+                        {
+                            id_product = productModel.id_product,
+                            id_image = (long)img.id_image,
+                            path = img.path_image
+                        }).ToList();
                     }
 
                     // Kiểm tra xem có sự thay đổi trong giá sản phẩm
