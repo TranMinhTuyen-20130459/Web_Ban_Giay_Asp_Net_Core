@@ -9,6 +9,9 @@
             _dbContext = dbContext;
         }
 
+        /*
+         * Lấy thông tin chi tiết của sản phẩm theo id_product
+         */
         public ProductModel GetProductById(long id)
         {
             var product = _dbContext.Products
@@ -55,6 +58,12 @@
             return null;
         }
 
+        /*
+         * Lấy ra danh sách sản phẩm theo loại và tên
+         * VD: 
+         * + lấy ra danh sách GIÀY có tên "Nike Pegasus 50"
+         * + lấy ra danh sách DÉP có tên "Adidas Runner"
+         */
         public List<ProductModel_Ver2> GetListProductOfTypeByName(int id_type, string keyword, int quantity)
         {
             if (string.IsNullOrEmpty(keyword) || quantity <= 0) return null;
@@ -118,6 +127,12 @@
             return null;
         }
 
+        /*
+         * Lấy ra danh sách sản phẩm theo Loại và Trạng Thái
+         * VD: 
+         * + lấy ra danh sách sản phẩm là GIÀY có trạng thái MỚI 
+         * + lấy ra danh sách sản phẩm là DÉP có trạng thái HOT
+         */
         public List<ProductModel_Ver2> GetListProductByTypeAndStatus(int id_type, int id_status, int page, int pageSize)
         {
 
@@ -162,6 +177,13 @@
             return null;
         }
 
+        /*
+         * Lấy ra số lượng sản phẩm theo Loại và Trạng Thái
+         * 
+         * VD: lấy ra số lượng sản phẩm GIÀY có trạng thái MỚI
+         * 
+         * => dùng để phân trang kết quả API trả về 
+         */
         public int GetProductCountOfTypeAndStatus(int id_type, int id_status)
         {
             var queryResult = _dbContext.Products.Where(p => p.type_product.id_type == id_type && (p.id_status_product == id_status));
@@ -169,6 +191,12 @@
             return queryResult.Count();
         }
 
+        /*
+         * Lấy ra danh sách sản phẩm theo Loại, Thương Hiệu và Giới Tính
+         * VD: 
+         * + lấy ra danh sách GIÀY của hãng NIKE dành cho Nam
+         * + lấy ra danh sách DÉP của hãng JORDAN dành cho Nữ
+         */
         public List<ProductModel_Ver2> GetListProductBy_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex, int page, int pageSize)
         {
             if (page <= 0 || pageSize <= 0) return null;
@@ -239,6 +267,13 @@
 
         }
 
+        /*
+         * Lấy ra số lượng sản phẩm của Loại, Thương Hiệu và Giới Tính 
+         * 
+         * VD: lấy ra số lượng sản phẩm GIÀY của hãng Nike dành cho Nam
+         * 
+         * => dùng để phân trang kết quả API trả về 
+         */
         public int GetProductCountOf_TypeAndBrandAndSex(int id_type, int id_brand, int id_sex)
         {
             var queryResult = _dbContext.Products
@@ -252,6 +287,9 @@
             return queryResult.Count();
         }
 
+        /*
+         * Thêm sản phẩm vào hệ thống
+         */
         public long? CreateProduct(ProductModel_Ver3 productModel)
         {
             /*
@@ -331,6 +369,9 @@
             }
         }
 
+        /*
+         * Cập nhật thông tin sản phẩm 
+         */
         public bool UpdateProduct(ProductModel_Ver4 productModel)
         {
             /*
@@ -466,6 +507,46 @@
                 return false;
             }
 
+        }
+
+        /*
+         * Lấy ra danh sách tất cả sản phẩm (được phép bán) đang có trong hệ thống 
+         */
+        public List<ProductModel_Ver2> GetAllProduct(int page, int pageSize)
+        {
+            IQueryable<Product> query = _dbContext.Products
+                                            .Where(p => p.id_status_product != (int)StatusProductEnum.KHONG_DUOC_BAN)
+                                            .Include(p => p.list_image)
+                                            .Skip((page - 1) * pageSize).Take(pageSize);
+
+            var queryResult = query.Select(p => new ProductModel_Ver2
+            {
+                id_product = p.id_product,
+                name_product = p.name_product,
+                star_review = p.star_review,
+                listed_price = p.listed_price,
+                promotional_price = p.promotional_price,
+                list_image = p.list_image.Select(img => new ImageProductModel
+                {
+                    id_image = img.id_image,
+                    path_image = img.path
+                }).ToList(),
+                id_status_product = p.id_status_product
+            }).ToList();
+
+            return queryResult;
+        }
+
+        /*
+         * Lấy ra số lượng tất cả sản phẩm(được phép bán) đang có trong hệ thống 
+         * 
+         * => dùng để phân trang kết quả API trả về
+         */
+        public int GetCountAllProduct()
+        {
+            var queryResult = _dbContext.Products.Where(p => p.id_status_product != (int)StatusProductEnum.KHONG_DUOC_BAN);
+
+            return queryResult.Count();
         }
     }
 }

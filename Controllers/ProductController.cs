@@ -147,5 +147,33 @@
                 return StatusCode(500, errorResponse);
             }
         }
+
+        [HttpGet("ds-tat-ca-san-pham")]
+        // Trả về Json danh sách tất cả các sản phẩm đang có trong hệ thống 
+        public IActionResult GetAllProduct([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository.GetAllProduct(validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
+
+                var totalItems = _productRepository.GetCountAllProduct();
+
+                return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+            }
+            catch (Exception)
+            {
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
+            }
+        }
     }
 }
