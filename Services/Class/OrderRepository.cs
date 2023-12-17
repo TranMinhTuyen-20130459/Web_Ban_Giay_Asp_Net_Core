@@ -114,6 +114,9 @@
             var queryResult = baseQuery.Select(order => new
             {
                 id_order = order.id_order,
+                name_customer = order.to_name,
+                to_address = order.to_address,
+                phone = order.to_phone,
                 time_order = order.time_order,
                 status_order = order.id_status_order,
                 list_order_detail = order.list_order_details,
@@ -127,7 +130,8 @@
                 // Tạo model từ kết quả truy vấn
                 var model = queryResult.Select(order => new HistoryOrderDetailModel
                 {
-                    infor_order = new HistoryOrderModel(order.id_order, order.time_order, order.status_order),
+                    infor_order = new HistoryOrderModel(order.id_order, order.name_customer, order.to_address, order.phone,
+                                                        order.time_order, order.status_order),
 
                     order_details = order.list_order_detail
                         .Select(order_detail => new OrderDetailModel_Ver2
