@@ -7,28 +7,19 @@
     {
         public long id_order { get; set; }
         public string? name_customer { get; set; }
-        public string? to_address { get; set; }
+        public string? address { get; set; }
         public string? phone { get; set; }
         public DateTime time_order { get; set; }
         public int status_order { get; set; }
         public string name_status_order { get; set; }
 
-        // Constructor này dùng cho API lấy ra lịch sử mua hàng dựa theo số điện thoại
-        public HistoryOrderModel(long id_order, DateTime time_order, int id_status_order)
-        {
-            this.id_order = id_order;
-            this.time_order = time_order;
-            this.status_order = id_status_order;
-            this.name_status_order = GetNameStatusOrder(id_status_order);
-        }
-
-        // Constructor này dùng cho API lấy ra thông tin của một đơn hàng
         public HistoryOrderModel(long id_order, string? name_customer, string? to_address,
+            string? to_ward_name, string? to_district_name, string? to_province_name,
             string? phone, DateTime time_order, int id_status_order)
         {
             this.id_order = id_order;
             this.name_customer = name_customer;
-            this.to_address = to_address;
+            this.address = GetInforAddress(to_address, to_ward_name, to_district_name, to_province_name);
             this.phone = phone;
             this.time_order = time_order;
             this.status_order = id_status_order;
@@ -49,5 +40,17 @@
                 default: { return ""; }
             }
         }
+
+        // Lấy thông tin địa chỉ chi tiết của đơn hàng 
+        public string GetInforAddress(string? to_address, string? to_ward_name, string? to_district_name, string? to_province_name)
+        {
+            string formattedAddress = string.Join(", ",
+                new[] { to_address, to_ward_name, to_district_name, to_province_name }
+                .Where(component => !string.IsNullOrEmpty(component))
+            );
+
+            return formattedAddress;
+        }
+
     }
 }

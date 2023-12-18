@@ -148,7 +148,7 @@
             }
         }
 
-        [HttpGet("ds-tat-ca-san-pham")]
+        [HttpGet("list-all-products")]
         // Trả về Json danh sách tất cả các sản phẩm đang có trong hệ thống 
         public IActionResult GetAllProduct([FromQuery] int page, [FromQuery] int pageSize)
         {

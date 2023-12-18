@@ -75,5 +75,36 @@
                 return StatusCode(500);
             }
         }
+
+        // Trả về chuỗi Json danh sách tất cả đơn hàng đang có trong hệ thống
+        [HttpGet("list-all-orders")]
+        public IActionResult GetAllOrder([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _orderRepository.GetAllOrder(validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) return NotFound();
+
+                var totalItems = _orderRepository.GetCountAllOrder();
+
+                return Ok(new PagedResponse<List<HistoryOrderModel>>(pagedData, validFilter.current_page, validFilter.page_size, (int)totalItems));
+            }
+            catch (Exception)
+            {
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
+            }
+        }
+
+
+
     }
 }
