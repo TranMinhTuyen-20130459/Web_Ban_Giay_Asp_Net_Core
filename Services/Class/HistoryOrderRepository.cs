@@ -9,6 +9,7 @@
             _dbContext = dbContext;
         }
 
+        // Lấy ra danh sách đơn hàng được mua bởi số điện thoại 
         public List<HistoryOrderModel> GetListOrderByPhoneNumber(string phoneNumber, int page, int pageSize)
         {
 
@@ -33,6 +34,7 @@
             return queryResult;
         }
 
+        // Lấy ra số lượng đơn hàng được mua bởi số điện thoại
         public int GetOrderCountByPhoneNumber(string phoneNumber)
         {
             return _dbContext.Orders.Where(od => od.to_phone == phoneNumber).Count();
