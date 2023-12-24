@@ -12,7 +12,7 @@
         }
 
         // Trả về chuỗi Json danh sách đơn hàng được mua bởi số điện thoại (có phân trang)
-        [Authorize]
+        // [Authorize]
         [HttpGet("lich-su-mua-hang")]
         public IActionResult GetListOrderByPhoneNumber([FromQuery] string phoneNumber, [FromQuery] int page, [FromQuery] int pageSize)
         {

@@ -1,5 +1,8 @@
 ﻿namespace Web_Ban_Giay_Asp_Net_Core.Models
 {
+    /*
+     * Đây là Model tương ứng với chuỗi Json dành cho thông tin chi tiết của một đơn hàng 
+     */
     public class HistoryOrderDetailModel
     {
         public HistoryOrderModel? infor_order { get; set; }

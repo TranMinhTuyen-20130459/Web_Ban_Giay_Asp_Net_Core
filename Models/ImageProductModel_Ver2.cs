@@ -2,7 +2,8 @@
 {
     public class ImageProductModel_Ver2
     {
-        [Required(ErrorMessage = "Path Image is required")]
+        [Required(ErrorMessage = "Path_image is required")]
+        [MinLength(15, ErrorMessage = "Path_image must be at least 15 characters long")]
         public string path_image { get; set; }
     }
 }

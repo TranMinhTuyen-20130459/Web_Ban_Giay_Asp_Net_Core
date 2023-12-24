@@ -5,15 +5,17 @@
     public class AuthenticationController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAdminRepository _adminRepository;
         private readonly AppSettings _appSettings;
 
-        public AuthenticationController(IUserRepository userRepository, IOptions<AppSettings> appSettings)
+        public AuthenticationController(IUserRepository userRepository, IAdminRepository adminRepository, IOptions<AppSettings> appSettings)
         {
             _userRepository = userRepository;
+            _adminRepository = adminRepository;
             _appSettings = appSettings.Value;
         }
 
-        [HttpPost("login-user")]
+        [HttpPost("/user/login-user")]
         public IActionResult LoginUser([FromBody] LoginModel loginModel)
         {
             try
@@ -58,6 +60,42 @@
             }
         }
 
+        [HttpPost("/admin/login-admin")]
+        public IActionResult LoginAdmin([FromBody] LoginModel loginModel)
+        {
+            try
+            {
+                // kiểm tra sự hợp lệ của dữ liệu Json nhận vào
+                if (!ModelState.IsValid) return BadRequest(loginModel);
+
+                var adminModel = _adminRepository.GetAdmin(loginModel);
+
+                // <=> Tài khoản Admin không có trong hệ thống 
+                if (adminModel == null)
+                {
+                    var errorRespone = new ErrorResponse
+                    {
+                        status = (int)HttpStatusCode.Unauthorized,
+                        error_code = "-1",
+                        error_message = "Email or password is incorrect"
+                    };
+                    return StatusCode(401, errorRespone);
+                }
+
+                // <=> Tài khoản Admin có trong hệ thống
+                return Ok(adminModel);
+            }
+            catch (Exception)
+            {
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
+            }
+        }
 
     }
 }

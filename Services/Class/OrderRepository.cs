@@ -9,6 +9,9 @@
             _dbContext = dbContext;
         }
 
+        /*
+         * Thêm đơn hàng vào hệ thống
+         */
         public long? CreateOrder(OrderModel orderModel)
         {
             AddressModel addressModel = orderModel.to_address;
@@ -100,6 +103,9 @@
             return null;
         }
 
+        /*
+         * Lấy ra thông tin chi tiết của đơn hàng dựa vào id_order
+         */
         public HistoryOrderDetailModel GetOrderDetailByIdOrder(long id_order)
         {
             if (id_order < 1) return null;
@@ -114,6 +120,12 @@
             var queryResult = baseQuery.Select(order => new
             {
                 id_order = order.id_order,
+                name_customer = order.to_name,
+                to_address = order.to_address,
+                to_ward = order.to_ward_name,
+                to_district = order.to_district_name,
+                to_province = order.to_province_name,
+                phone = order.to_phone,
                 time_order = order.time_order,
                 status_order = order.id_status_order,
                 list_order_detail = order.list_order_details,
@@ -127,7 +139,15 @@
                 // Tạo model từ kết quả truy vấn
                 var model = queryResult.Select(order => new HistoryOrderDetailModel
                 {
-                    infor_order = new HistoryOrderModel(order.id_order, order.time_order, order.status_order),
+                    infor_order = new HistoryOrderModel(order.id_order,
+                                                        order.name_customer,
+                                                        order.to_address,
+                                                        order.to_ward,
+                                                        order.to_district,
+                                                        order.to_province,
+                                                        order.phone,
+                                                        order.time_order,
+                                                        order.status_order),
 
                     order_details = order.list_order_detail
                         .Select(order_detail => new OrderDetailModel_Ver2
@@ -159,5 +179,41 @@
 
             return null;
         }
+
+        /*
+         * Lấy ra danh sách tất cả đơn hàng đang có trong hệ thống 
+         * 
+         * => có phân trang kết quả API trả về 
+         */
+        public List<HistoryOrderModel> GetAllOrder(int page, int pageSize)
+        {
+            IQueryable<Order> query = _dbContext.Orders
+                                                .Skip((page - 1) * pageSize)
+                                                .Take(pageSize);
+
+            var queryResult = query.Select(od => new HistoryOrderModel(od.id_order,
+                                                                        od.to_name,
+                                                                        od.to_address,
+                                                                        od.to_ward_name,
+                                                                        od.to_district_name,
+                                                                        od.to_province_name,
+                                                                        od.to_phone,
+                                                                        od.time_order,
+                                                                        od.id_status_order)
+                                           ).ToList();
+
+            return queryResult;
+        }
+
+        /*
+         * Lấy ra số lượng đơn hàng đang có trong hệ thống 
+         * 
+         * => dùng để phân trang kết quả API trả về
+         */
+        public long GetCountAllOrder()
+        {
+            return _dbContext.Orders.Count();
+        }
+
     }
 }

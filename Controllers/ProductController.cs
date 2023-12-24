@@ -58,7 +58,7 @@
         }
 
         // Thêm một sản phẩm vào hệ thống và trả về id của sản phẩm được thêm
-        [Authorize]
+        // [Authorize]
         [HttpPost("create-product")]
         public IActionResult CreateProduct([FromBody] ProductModel_Ver3 productModel)
         {
@@ -98,7 +98,7 @@
         }
 
         // Cập nhật thông tin của sản phẩm và trả về kết quả true or false
-        [Authorize]
+        // [Authorize]
         [HttpPut("update-product")]
         public IActionResult UpdateProduct([FromBody] ProductModel_Ver4 productModel)
         {
@@ -124,7 +124,7 @@
         }
 
         // Cập nhật sản phẩm thành trạng thái KHONG_DUOC_BAN trong hệ thống
-        [Authorize]
+        // [Authorize]
         [HttpDelete("delete-product")]
         public IActionResult DeleteProduct([FromBody] ProductModel_Ver5 productModel)
         {
@@ -137,6 +137,34 @@
                 return Ok(new { status_delete = checkDelete });
             }
             catch
+            {
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
+            }
+        }
+
+        [HttpGet("list-all-products")]
+        // Trả về Json danh sách tất cả các sản phẩm đang có trong hệ thống 
+        public IActionResult GetAllProduct([FromQuery] int page, [FromQuery] int pageSize)
+        {
+            try
+            {
+                var validFilter = new PaginationFilter(page, pageSize);
+
+                var pagedData = _productRepository.GetAllProduct(validFilter.current_page, validFilter.page_size);
+
+                if (pagedData == null || pagedData.Count == 0) { return NotFound(); }
+
+                var totalItems = _productRepository.GetCountAllProduct();
+
+                return Ok(new PagedResponse<List<ProductModel_Ver2>>(pagedData, validFilter.current_page, validFilter.page_size, totalItems));
+            }
+            catch (Exception)
             {
                 var errorResponse = new ErrorResponse
                 {

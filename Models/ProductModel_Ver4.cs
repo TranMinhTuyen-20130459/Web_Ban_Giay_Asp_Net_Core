@@ -1,5 +1,8 @@
 ﻿namespace Web_Ban_Giay_Asp_Net_Core.Models
 {
+    /*
+     * đây là Model định nghĩa chuỗi Json để cập nhật thông tin của sản phẩm 
+     */
     public class ProductModel_Ver4
     {
         [Required(ErrorMessage = "Product Id is required")]
@@ -36,5 +39,10 @@
         [Required(ErrorMessage = "Status Product ID is required")]
         [Range(1, 7, ErrorMessage = "Status Product ID must be >0 AND <8")]
         public int id_status_product { get; set; }
+
+        public List<SizeProductModel>? list_size { get; set; }
+
+        public List<ImageProductModel>? list_image { get; set; }
+
     }
 }
