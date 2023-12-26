@@ -13,5 +13,11 @@
 
         // lấy ra số lượng của đơn hàng đang có trong hệ thống
         long GetCountAllOrder();
+
+        // lấy ra danh sách đơn hàng theo trạng thái 
+        List<HistoryOrderModel> GetListOrderByStatus(int id_status_order, int page, int pageSize);
+
+        // lấy ra số lượng đơn hàng theo trạng thái 
+        long CountOrdersByStatus(int id_status_order);
     }
 }

@@ -215,5 +215,49 @@
             return _dbContext.Orders.Count();
         }
 
+        /*
+         * Lấy ra danh sách đơn hàng theo trạng thái 
+         * 
+         * VD:
+         * + Lấy ra danh sách các đơn hàng có trạng thái CHỜ XÁC NHẬN 
+         * + Lấy ra danh sách đơn hàng có trạng thái ĐANG GIAO HÀNG 
+         */
+        public List<HistoryOrderModel> GetListOrderByStatus(int id_status_order, int page, int pageSize)
+        {
+            IQueryable<Order> query = _dbContext.Orders
+                                                .Where(order => order.id_status_order == id_status_order)
+                                                .Skip((page - 1) * pageSize)
+                                                .Take(pageSize);
+
+            var queryResult = query.Select(od => new HistoryOrderModel(
+                                                od.id_order,
+                                                od.to_name,
+                                                od.to_address,
+                                                od.to_ward_name,
+                                                od.to_district_name,
+                                                od.to_province_name,
+                                                od.to_phone,
+                                                od.time_order,
+                                                od.id_status_order
+                                                )).ToList();
+
+            return queryResult;
+        }
+
+        /*
+         * Lấy ra số lượng đơn hàng theo trạng thái 
+         * 
+         * VD:
+         * + Lấy ra số lượng đơn hàng đang có trạng thái là CHỜ XÁC NHẬN
+         * + Lấy ra số lượng đơn hàng đang có trạng thái ĐANG GIAO HÀNG 
+         * 
+         * => dùng để phân trang kết quả API trả về
+         */
+        public long CountOrdersByStatus(int id_status_order)
+        {
+            var query = _dbContext.Orders.Where(order => order.id_status_order == id_status_order);
+
+            return query.Count();
+        }
     }
 }
