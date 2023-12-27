@@ -42,6 +42,12 @@
 
         public DbSet<HistoryUpdateProduct> HistoryUpdateProducts { get; set; }
 
+        public DbSet<StatusOrder> StatusOrders { get; set; }
+
+        public DbSet<StatusPayment> StatusPayments { get; set; }
+
+        public DbSet<MethodPayment> MethodPayments { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

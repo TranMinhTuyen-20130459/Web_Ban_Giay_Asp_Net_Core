@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Web_Ban_Giay_Asp_Net_Core.Data.Interface;
+using Web_Ban_Giay_Asp_Net_Core.Data.Util;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
 {
@@ -49,8 +50,11 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
             {
                 try
                 {
-                    // tạo mới 10000 đơn hàng
-                    for (int i = 0; i < 10000; i++)
+                    var list_id_product = DataUtil.GetListIdProduct(dbContext);
+                    var list_name_size = DataUtil.GetListNameSize(dbContext);
+
+                    // tạo mới 1000 đơn hàng
+                    for (int i = 0; i < 1000; i++)
                     {
                         int index_ward_from = random.Next(0, arr_name_wards.Length);
                         int index_district_from = random.Next(0, arr_name_districts.Length);
@@ -96,11 +100,24 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                             order_value = order_value,
                             total_price = ship_price + order_value,
 
-                            id_status_order = random.Next(1, 8) // id_status_order từ 1 đến 7
+                            id_status_order = random.Next(1, 8),// id_status_order từ 1 đến 7
+                            id_status_payment = random.Next(1, 3), // id_status_payment từ 1 đến 2
+                            id_method_payment = random.Next(1, 4), // id_method_payment từ 1 đến 3
                         };
                         dbContext.Orders.Add(order);
+                        dbContext.SaveChanges();
+
+                        var id_order = order.id_order;
+
+                        // Tạo ds chi tiết đơn hàng ngẫu nhiên 
+                        var list_order_detail = DataUtil.CreateOrderDetailsRandom(id_order, list_id_product, list_name_size);
+
+                        list_order_detail.ForEach(od =>
+                        {
+                            dbContext.OrderDetails.Add(od);
+                        });
+                        dbContext.SaveChanges();
                     }
-                    dbContext.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception ex)
