@@ -45,8 +45,8 @@
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            const string connectionString = "Server=MYSQL5044.site4now.net;Database=db_aa3101_tranhao;User=aa3101_tranhao;Password=Thuctap2023;";
-            //const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
+            //const string connectionString = "Server=MYSQL5044.site4now.net;Database=db_aa3101_tranhao;User=aa3101_tranhao;Password=Thuctap2023;";
+            const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
@@ -135,6 +135,27 @@
                  .WithMany(p => p.list_history_update)
                  .HasForeignKey(h_u_p => h_u_p.id_product)
                  .OnDelete(DeleteBehavior.Cascade);
+
+            // Cấu hình khóa ngoại giữa Order và StatusOrder
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.status_order)
+                .WithMany(s_o => s_o.list_order)
+                .HasForeignKey(o => o.id_status_order)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Cấu hình khóa ngoại giữa Order và StatusPayment
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.status_payment)
+                .WithMany(s_p => s_p.list_order)
+                .HasForeignKey(o => o.id_status_payment)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Cấu hình khóa ngoại giữa Order và MethodPayment
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.method_payment)
+                .WithMany(m_p => m_p.list_order)
+                .HasForeignKey(o => o.id_method_payment)
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
     }
