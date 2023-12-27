@@ -2,8 +2,8 @@
 {
     public enum StatusPaymentEnum
     {
-        CHO_THANH_TOAN = 0,
-        DA_THANH_TOAN = 1
+        CHO_THANH_TOAN = 1,
+        DA_THANH_TOAN = 2
     }
     [Table("Status_Payments")]
     public class StatusPayment
