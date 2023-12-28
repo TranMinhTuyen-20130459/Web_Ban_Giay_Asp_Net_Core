@@ -26,7 +26,7 @@
             {
                 var id_order = _orderRepository.CreateOrder(orderModel);
 
-                if (id_order == null) return StatusCode(500); // không tạo được đơn hàng do lỗi khi thực hiện câu truy vấn
+                if (id_order == null) throw new Exception(); // không tạo được đơn hàng do lỗi khi thực hiện câu truy vấn
 
                 if (id_order == -1)
                 {

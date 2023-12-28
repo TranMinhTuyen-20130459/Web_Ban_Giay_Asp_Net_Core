@@ -36,7 +36,9 @@
                 order_value = orderModel.order_value,
                 total_price = orderModel.ship_price + orderModel.order_value,
 
-                id_status_order = (int)StatusOrderEnum.CHO_XAC_NHAN
+                id_status_order = (int)StatusOrderEnum.CHO_XAC_NHAN,
+                id_status_payment = orderModel.payment.id_status_payment,
+                id_method_payment = orderModel.payment.id_method_payment
             };
 
             using (var transaction = _dbContext.Database.BeginTransaction())

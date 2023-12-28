@@ -26,5 +26,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Models
         public decimal order_value { get; set; }
 
         public List<OrderDetailModel> list_order_detail { get; set; }
+
+        public PaymentModel_Ver1 payment { get; set; }
     }
 }
