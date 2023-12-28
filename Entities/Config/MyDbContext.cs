@@ -51,8 +51,8 @@
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            //const string connectionString = "Server=MYSQL5044.site4now.net;Database=db_aa3101_tranhao;User=aa3101_tranhao;Password=Thuctap2023;";
-            const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
+            const string connectionString = "Server=MYSQL5044.site4now.net;Database=db_aa3101_tranhao;User=aa3101_tranhao;Password=Thuctap2023;";
+            //const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }

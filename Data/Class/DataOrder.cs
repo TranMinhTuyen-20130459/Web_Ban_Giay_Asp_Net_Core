@@ -54,7 +54,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
                     var list_name_size = DataUtil.GetListNameSize(dbContext);
 
                     // tạo mới 1000 đơn hàng
-                    for (int i = 0; i < 1000; i++)
+                    for (int i = 0; i < 100; i++)
                     {
                         int index_ward_from = random.Next(0, arr_name_wards.Length);
                         int index_district_from = random.Next(0, arr_name_districts.Length);
