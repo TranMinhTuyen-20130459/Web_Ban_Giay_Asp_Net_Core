@@ -133,7 +133,9 @@
                 list_order_detail = order.list_order_details,
                 order_value = order.order_value,
                 ship_price = order.ship_price,
-                total_price = order.total_price
+                total_price = order.total_price,
+                id_status_payment = order.id_status_payment,
+                id_method_payment = order.id_method_payment
             }).ToList();
 
             if (queryResult.Any()) // nếu kết quả truy vấn có phần tử
@@ -149,7 +151,9 @@
                                                         order.to_province,
                                                         order.phone,
                                                         order.time_order,
-                                                        order.status_order),
+                                                        order.status_order,
+                                                        new PaymentModel_Ver2(order.id_status_payment, order.id_method_payment)
+                                                        ),
 
                     order_details = order.list_order_detail
                         .Select(order_detail => new OrderDetailModel_Ver2
@@ -201,7 +205,8 @@
                                                                         od.to_province_name,
                                                                         od.to_phone,
                                                                         od.time_order,
-                                                                        od.id_status_order)
+                                                                        od.id_status_order,
+                                                                        new PaymentModel_Ver2(od.id_status_payment, od.id_method_payment))
                                            ).ToList();
 
             return queryResult;
@@ -240,7 +245,8 @@
                                                 od.to_province_name,
                                                 od.to_phone,
                                                 od.time_order,
-                                                od.id_status_order
+                                                od.id_status_order,
+                                                new PaymentModel_Ver2(od.id_status_payment, od.id_method_payment)
                                                 )).ToList();
 
             return queryResult;

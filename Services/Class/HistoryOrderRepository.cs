@@ -29,7 +29,8 @@
                                                                         od.to_province_name,
                                                                         od.to_phone,
                                                                         od.time_order,
-                                                                        od.id_status_order
+                                                                        od.id_status_order,
+                                                                        new PaymentModel_Ver2(od.id_status_payment, od.id_method_payment)
                                                                         )).ToList();
             return queryResult;
         }

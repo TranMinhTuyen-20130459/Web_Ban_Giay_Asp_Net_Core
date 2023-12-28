@@ -12,10 +12,11 @@
         public DateTime time_order { get; set; }
         public int status_order { get; set; }
         public string name_status_order { get; set; }
+        public PaymentModel_Ver2 payment { get; set; }
 
         public HistoryOrderModel(long id_order, string? name_customer, string? to_address,
             string? to_ward_name, string? to_district_name, string? to_province_name,
-            string? phone, DateTime time_order, int id_status_order)
+            string? phone, DateTime time_order, int id_status_order, PaymentModel_Ver2 payment)
         {
             this.id_order = id_order;
             this.name_customer = name_customer;
@@ -24,6 +25,7 @@
             this.time_order = time_order;
             this.status_order = id_status_order;
             this.name_status_order = GetNameStatusOrder(id_status_order);
+            this.payment = payment;
         }
 
         public string GetNameStatusOrder(int id_status_order)
