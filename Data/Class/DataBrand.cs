@@ -18,9 +18,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
             {
                 try
                 {
-                    foreach (var brandName in arr_brands)
+                    for (int i = 0; i < arr_brands.Length; i++)
                     {
-                        var brand = new Brand { name_brand = brandName };
+                        var brand = new Brand
+                        {
+                            id_brand = i + 1,
+                            name_brand = arr_brands[i]
+                        };
                         dbContext.Brands.Add(brand);
 
                     }

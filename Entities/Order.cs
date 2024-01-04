@@ -1,15 +1,5 @@
 ﻿namespace Web_Ban_Giay_Asp_Net_Core.Entities
 {
-    public enum StatusOrderEnum
-    {
-        CHO_XAC_NHAN = 1,
-        DA_XAC_NHAN = 2,
-        CHO_LAY_HANG = 3,
-        DANG_GIAO_HANG = 4,
-        DA_GIAO_HANG = 5,
-        TRA_HANG = 6,
-        HUY_DON_HANG = 7
-    }
     [Table("Orders")]
     public class Order
     {
@@ -63,8 +53,14 @@
 
         [Range(0, int.MaxValue, ErrorMessage = "id_status_order must be greater than or equal to 0.")]
         public int id_status_order { get; set; }
+        public StatusOrder status_order { get; set; }
 
         public ICollection<OrderDetail> list_order_details { get; set; }
 
+        public int id_status_payment { get; set; }
+        public StatusPayment status_payment { get; set; }
+
+        public int id_method_payment { get; set; }
+        public MethodPayment method_payment { get; set; }
     }
 }

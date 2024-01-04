@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using Web_Ban_Giay_Asp_Net_Core.Entities;
-using Web_Ban_Giay_Asp_Net_Core.Entities.Config;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Data.Util
 {
@@ -56,5 +54,39 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Util
             return result;
         }
 
+        /*
+         * Tạo ra tối đa 5 sản phẩm trong một đơn hàng dựa theo id_order,list_id_product,list_name_size
+         */
+        public static List<OrderDetail> CreateOrderDetailsRandom(long id_order, ArrayList list_id_product, ArrayList list_name_size)
+        {
+            var orderDetails = new List<OrderDetail>();
+            var random = new Random();
+
+            // Đảm bảo số lượng sản phẩm và kích thước có ít nhất một phần tử.
+            if (list_id_product.Count > 0 && list_name_size.Count > 0)
+            {
+                var number = random.Next(1, 6);
+
+                for (int i = 0; i < number; i++)
+                {
+                    // Chọn ngẫu nhiên một id_product và name_size từ danh sách tương ứng.
+                    long randomProductId = (long)list_id_product[random.Next(list_id_product.Count)];
+                    string randomNameSize = (string)list_name_size[random.Next(list_name_size.Count)];
+
+                    // Tạo một OrderDetail mới và thêm vào danh sách.
+                    var orderDetail = new OrderDetail
+                    {
+                        id_order = id_order,
+                        id_product = randomProductId,
+                        name_size = randomNameSize,
+                        quantity = random.Next(1, 10),
+                        price = random.Next(0, (int)(5 * Math.Pow(10, 5)))
+                    };
+
+                    orderDetails.Add(orderDetail);
+                }
+            }
+            return orderDetails;
+        }
     }
 }

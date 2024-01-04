@@ -16,9 +16,13 @@ namespace Web_Ban_Giay_Asp_Net_Core.Data.Class
             {
                 try
                 {
-                    foreach (var item in arr_type_products)
+                    for (int i = 0; i < arr_type_products.Length; i++)
                     {
-                        var typeProduct = new TypeProduct { name_type = item };
+                        var typeProduct = new TypeProduct
+                        {
+                            id_type = i + 1,
+                            name_type = arr_type_products[i]
+                        };
                         dbContext.TypeProducts.Add(typeProduct);
                     }
                     dbContext.SaveChanges();

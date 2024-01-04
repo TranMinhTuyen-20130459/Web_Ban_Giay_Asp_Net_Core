@@ -26,7 +26,7 @@
             {
                 var id_order = _orderRepository.CreateOrder(orderModel);
 
-                if (id_order == null) return StatusCode(500); // không tạo được đơn hàng do lỗi khi thực hiện câu truy vấn
+                if (id_order == null) throw new Exception(); // không tạo được đơn hàng do lỗi khi thực hiện câu truy vấn
 
                 if (id_order == -1)
                 {
@@ -78,17 +78,29 @@
 
         // Trả về chuỗi Json danh sách tất cả đơn hàng đang có trong hệ thống
         [HttpGet("list-all-orders")]
-        public IActionResult GetAllOrder([FromQuery] int page, [FromQuery] int pageSize)
+        public IActionResult GetAllOrder([FromQuery] int page, [FromQuery] int pageSize, [FromQuery] int idStatusOrder)
         {
             try
             {
                 var validFilter = new PaginationFilter(page, pageSize);
 
-                var pagedData = _orderRepository.GetAllOrder(validFilter.current_page, validFilter.page_size);
+                List<HistoryOrderModel>? pagedData = null;
+                long totalItems = 0;
+
+                //TH: Nếu idStatusOrder > 0 => trả về danh sách đơn hàng theo trạng thái 
+                if (idStatusOrder > 0)
+                {
+                    pagedData = _orderRepository.GetListOrderByStatus(idStatusOrder, validFilter.current_page, validFilter.page_size);
+                    totalItems = _orderRepository.CountOrdersByStatus(idStatusOrder);
+                }
+                //TH: Nếu idStatusOrder <= 0 => trả về danh sách tất cả các đơn hàng 
+                else
+                {
+                    pagedData = _orderRepository.GetAllOrder(validFilter.current_page, validFilter.page_size);
+                    totalItems = _orderRepository.GetCountAllOrder();
+                }
 
                 if (pagedData == null || pagedData.Count == 0) return NotFound();
-
-                var totalItems = _orderRepository.GetCountAllOrder();
 
                 return Ok(new PagedResponse<List<HistoryOrderModel>>(pagedData, validFilter.current_page, validFilter.page_size, (int)totalItems));
             }

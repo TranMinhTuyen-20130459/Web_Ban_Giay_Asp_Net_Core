@@ -36,7 +36,9 @@
                 order_value = orderModel.order_value,
                 total_price = orderModel.ship_price + orderModel.order_value,
 
-                id_status_order = (int)StatusOrderEnum.CHO_XAC_NHAN
+                id_status_order = (int)StatusOrderEnum.CHO_XAC_NHAN,
+                id_status_payment = orderModel.payment.id_status_payment,
+                id_method_payment = orderModel.payment.id_method_payment
             };
 
             using (var transaction = _dbContext.Database.BeginTransaction())
@@ -131,7 +133,9 @@
                 list_order_detail = order.list_order_details,
                 order_value = order.order_value,
                 ship_price = order.ship_price,
-                total_price = order.total_price
+                total_price = order.total_price,
+                id_status_payment = order.id_status_payment,
+                id_method_payment = order.id_method_payment
             }).ToList();
 
             if (queryResult.Any()) // nếu kết quả truy vấn có phần tử
@@ -147,7 +151,9 @@
                                                         order.to_province,
                                                         order.phone,
                                                         order.time_order,
-                                                        order.status_order),
+                                                        order.status_order,
+                                                        new PaymentModel_Ver2(order.id_status_payment, order.id_method_payment)
+                                                        ),
 
                     order_details = order.list_order_detail
                         .Select(order_detail => new OrderDetailModel_Ver2
@@ -199,7 +205,8 @@
                                                                         od.to_province_name,
                                                                         od.to_phone,
                                                                         od.time_order,
-                                                                        od.id_status_order)
+                                                                        od.id_status_order,
+                                                                        new PaymentModel_Ver2(od.id_status_payment, od.id_method_payment))
                                            ).ToList();
 
             return queryResult;
@@ -215,5 +222,50 @@
             return _dbContext.Orders.Count();
         }
 
+        /*
+         * Lấy ra danh sách đơn hàng theo trạng thái 
+         * 
+         * VD:
+         * + Lấy ra danh sách các đơn hàng có trạng thái CHỜ XÁC NHẬN 
+         * + Lấy ra danh sách đơn hàng có trạng thái ĐANG GIAO HÀNG 
+         */
+        public List<HistoryOrderModel> GetListOrderByStatus(int id_status_order, int page, int pageSize)
+        {
+            IQueryable<Order> query = _dbContext.Orders
+                                                .Where(order => order.id_status_order == id_status_order)
+                                                .Skip((page - 1) * pageSize)
+                                                .Take(pageSize);
+
+            var queryResult = query.Select(od => new HistoryOrderModel(
+                                                od.id_order,
+                                                od.to_name,
+                                                od.to_address,
+                                                od.to_ward_name,
+                                                od.to_district_name,
+                                                od.to_province_name,
+                                                od.to_phone,
+                                                od.time_order,
+                                                od.id_status_order,
+                                                new PaymentModel_Ver2(od.id_status_payment, od.id_method_payment)
+                                                )).ToList();
+
+            return queryResult;
+        }
+
+        /*
+         * Lấy ra số lượng đơn hàng theo trạng thái 
+         * 
+         * VD:
+         * + Lấy ra số lượng đơn hàng đang có trạng thái là CHỜ XÁC NHẬN
+         * + Lấy ra số lượng đơn hàng đang có trạng thái ĐANG GIAO HÀNG 
+         * 
+         * => dùng để phân trang kết quả API trả về
+         */
+        public long CountOrdersByStatus(int id_status_order)
+        {
+            var query = _dbContext.Orders.Where(order => order.id_status_order == id_status_order);
+
+            return query.Count();
+        }
     }
 }
