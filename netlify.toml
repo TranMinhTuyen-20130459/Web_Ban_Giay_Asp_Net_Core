@@ -1,6 +1,6 @@
 [build]
-  command = "dotnet publish -c Release -o bin/Release/net6.0/publish/"
-  publish = "bin/Release/net6.0/publish/"
+  command = "dotnet publish -c ."
+  publish = "."
 
 [[plugins]]
   package = "@netlify/plugin-functions-core"
