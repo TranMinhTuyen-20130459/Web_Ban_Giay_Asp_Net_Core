@@ -1,0 +1,6 @@
+[build]
+  command = "dotnet publish -c Release -o published"
+  publish = "published"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-core"
