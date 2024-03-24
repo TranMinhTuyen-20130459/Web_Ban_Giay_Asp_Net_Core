@@ -51,7 +51,7 @@
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            const string connectionString = "Server=viaduct.proxy.rlwy.net;Database=railway;User=root;Password=bhgdEBAc6B3E44cgbCA5E5DEgef3aFab;Port=35184";
+            const string connectionString = "Server=roundhouse.proxy.rlwy.net;Database=thuong_mai_dien_tu;User=root;Password=OPfHujkALTcykkkWMFAghntAqaoduEnF;Port=57995";
             //const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
