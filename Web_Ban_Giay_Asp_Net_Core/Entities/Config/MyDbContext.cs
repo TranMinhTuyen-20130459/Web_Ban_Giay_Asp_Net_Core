@@ -3,6 +3,13 @@
     public class MyDbContext : DbContext
     {
 
+        private readonly IConfiguration _config;
+
+        public MyDbContext(IConfiguration config)
+        {
+            _config = config;
+        }
+
         private static readonly ILoggerFactory _loggerFactory = LoggerFactory.Create(builder =>
         {
             builder.AddFilter(DbLoggerCategory.Query.Name, LogLevel.Information);
@@ -51,8 +58,8 @@
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            const string connectionString = "Server=roundhouse.proxy.rlwy.net;Database=thuong_mai_dien_tu;User=root;Password=OPfHujkALTcykkkWMFAghntAqaoduEnF;Port=57995";
-            //const string connectionString = "Server=127.0.0.1;Database=asp_net_core_web_ban_giay;User=root;Password=;";
+            string connectionString = _config.GetConnectionString("MySQL");
+
             optionsBuilder.UseLoggerFactory(_loggerFactory);
             optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
