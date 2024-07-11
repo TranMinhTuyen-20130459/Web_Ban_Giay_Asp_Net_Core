@@ -7,7 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+// Cấu hình Swagger
+builder.Services.AddSwaggerGen(s =>
+{
+    s.SwaggerDoc("v1.1", new() { Title = "Web_Ban_Giay_API", Version = "v1.1" });
+    s.SwaggerDoc("v1.2", new() { Title = "Web_Ban_Giay_API", Version = "v1.2" });
+
+});
 
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
@@ -47,7 +54,11 @@ if (app.Environment.IsDevelopment())
 */
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(s =>
+{
+    s.SwaggerEndpoint("/swagger/v1.1/swagger.json", "Web_Ban_Giay_API v1.1");
+    s.SwaggerEndpoint("/swagger/v1.2/swagger.json", "Web_Ban_Giay_API v1.2");
+});
 
 app.UseHttpsRedirection();
 

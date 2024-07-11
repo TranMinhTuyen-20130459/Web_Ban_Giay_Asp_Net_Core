@@ -1,7 +1,8 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_2
 {
     [Route("api/authentication/")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v1.2")]
     public class AuthenticationController : ControllerBase
     {
         private readonly IUserRepository _userRepository;

@@ -1,7 +1,8 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_2
 {
     [Route("api/history/")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v1.2")]
     public class HistoryController : ControllerBase
     {
         private readonly IHistoryOrderRepository _historyOrderRepository;

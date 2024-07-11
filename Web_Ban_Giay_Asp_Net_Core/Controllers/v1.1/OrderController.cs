@@ -1,7 +1,8 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers
+﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
 {
     [Route("api/order/")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v1.1")]
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository _orderRepository;
