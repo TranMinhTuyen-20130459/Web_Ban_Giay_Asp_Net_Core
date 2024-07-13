@@ -1,23 +1,18 @@
-﻿using Web_Ban_Giay_Asp_Net_Core.Services.Class;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
+﻿var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 
-// Cấu hình Swagger
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddSwaggerGen(s =>
 {
     s.SwaggerDoc("v1.1", new() { Title = "Web_Ban_Giay_API", Version = "v1.1" });
     s.SwaggerDoc("v1.2", new() { Title = "Web_Ban_Giay_API", Version = "v1.2" });
-
+    //s.DocInclusionPredicate((docName, apiDesc) => true); // Bật cho phép tất cả các API được tài liệu hóa
 });
 
 builder.Services.AddDbContext<MyDbContext>(options =>
 {
+
     string connectionString = builder.Configuration.GetConnectionString("MySQL");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
@@ -33,9 +28,8 @@ builder.Services.AddCors(c => c.AddPolicy("MyCors", build =>
     .AllowAnyHeader();
 }));
 
-// configure strongly typed settings object
-builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IHistoryOrderRepository, HistoryOrderRepository>();
@@ -44,7 +38,6 @@ builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 /*
 if (app.Environment.IsDevelopment())
 {
@@ -61,9 +54,6 @@ app.UseSwaggerUI(s =>
 });
 
 app.UseHttpsRedirection();
-
-// Custom jwt auth middleware
-app.UseMiddleware<JwtMiddleware>();
 
 app.UseRouting();
 

@@ -1,101 +1,105 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1;
+﻿using Web_Ban_Giay_Asp_Net_Core.Constants.String;
 
-[Route("api/authentication/")]
-[ApiController]
-[ApiExplorerSettings(GroupName = "v1.1")]
-public class AuthenticationController : ControllerBase
+namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IAdminRepository _adminRepository;
-    private readonly AppSettings _appSettings;
 
-    public AuthenticationController(IUserRepository userRepository, IAdminRepository adminRepository, IOptions<AppSettings> appSettings)
+    [Route(RouterControllerName.Authentication_V1_1)]
+    [ApiController]
+    [ApiExplorerSettings(GroupName = "v1.1")]
+    public class AuthenticationController : ControllerBase
     {
-        _userRepository = userRepository;
-        _adminRepository = adminRepository;
-        _appSettings = appSettings.Value;
-    }
+        private readonly IUserRepository _userRepository;
+        private readonly IAdminRepository _adminRepository;
+        private readonly AppSettings _appSettings;
 
-    [HttpPost("/user/login-user")]
-    public IActionResult LoginUser([FromBody] LoginModel loginModel)
-    {
-        try
+        public AuthenticationController(IUserRepository userRepository, IAdminRepository adminRepository, IOptions<AppSettings> appSettings)
         {
-            // kiểm tra sự hợp lệ của dữ liệu Json nhận vào
-            if (!ModelState.IsValid) { return BadRequest(loginModel); }
+            _userRepository = userRepository;
+            _adminRepository = adminRepository;
+            _appSettings = appSettings.Value;
+        }
 
-            var userModel = _userRepository.GetUser(loginModel);
+        [HttpPost("user/login-user")]
+        public IActionResult LoginUser([FromBody] LoginModel loginModel)
+        {
+            try
+            {
+                // kiểm tra sự hợp lệ của dữ liệu Json nhận vào
+                if (!ModelState.IsValid) { return BadRequest(loginModel); }
 
-            // <=> User không có trong hệ thống
-            if (userModel == null)
+                var userModel = _userRepository.GetUser(loginModel);
+
+                // <=> User không có trong hệ thống
+                if (userModel == null)
+                {
+                    var errorResponse = new ErrorResponse
+                    {
+                        status = (int)HttpStatusCode.Unauthorized, // => lỗi 401
+                        error_code = "-1",
+                        error_message = "Email or password is incorrect"
+                    };
+                    return StatusCode(401, errorResponse);
+                }
+
+                // <=> User có trong hệ thống
+                var loginResponse = new LoginResponse
+                {
+                    access_token = FunctionUtil.GenerateJwtToken(userModel, _appSettings),
+                    token_type = TokenTypes.BEARER,
+                    expires_in = "3 minutes" // => thời gian hiệu lực của access_token
+                };
+
+                return Ok(loginResponse);
+
+            }
+            catch
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = (int)HttpStatusCode.Unauthorized, // => lỗi 401
-                    error_code = "-1",
-                    error_message = "Email or password is incorrect"
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
                 };
-                return StatusCode(401, errorResponse);
+                return StatusCode(500, errorResponse);
             }
-
-            // <=> User có trong hệ thống
-            var loginResponse = new LoginResponse
-            {
-                access_token = FunctionUtil.GenerateJwtToken(userModel, _appSettings),
-                token_type = TokenTypes.BEARER,
-                expires_in = "3 minutes" // => thời gian hiệu lực của access_token
-            };
-
-            return Ok(loginResponse);
-
         }
-        catch
+
+        [HttpPost("admin/login-admin")]
+        public IActionResult LoginAdmin([FromBody] LoginModel loginModel)
         {
-            var errorResponse = new ErrorResponse
+            try
             {
-                status = 500,
-                error_code = "-2",
-                error_message = "Error From Server"
-            };
-            return StatusCode(500, errorResponse);
-        }
-    }
+                // kiểm tra sự hợp lệ của dữ liệu Json nhận vào
+                if (!ModelState.IsValid) return BadRequest(loginModel);
 
-    [HttpPost("/admin/login-admin")]
-    public IActionResult LoginAdmin([FromBody] LoginModel loginModel)
-    {
-        try
-        {
-            // kiểm tra sự hợp lệ của dữ liệu Json nhận vào
-            if (!ModelState.IsValid) return BadRequest(loginModel);
+                var adminModel = _adminRepository.GetAdmin(loginModel);
 
-            var adminModel = _adminRepository.GetAdmin(loginModel);
-
-            // <=> Tài khoản Admin không có trong hệ thống 
-            if (adminModel == null)
-            {
-                var errorRespone = new ErrorResponse
+                // <=> Tài khoản Admin không có trong hệ thống 
+                if (adminModel == null)
                 {
-                    status = (int)HttpStatusCode.Unauthorized,
-                    error_code = "-1",
-                    error_message = "Email or password is incorrect"
-                };
-                return StatusCode(401, errorRespone);
+                    var errorRespone = new ErrorResponse
+                    {
+                        status = (int)HttpStatusCode.Unauthorized,
+                        error_code = "-1",
+                        error_message = "Email or password is incorrect"
+                    };
+                    return StatusCode(401, errorRespone);
+                }
+
+                // <=> Tài khoản Admin có trong hệ thống
+                return Ok(adminModel);
             }
-
-            // <=> Tài khoản Admin có trong hệ thống
-            return Ok(adminModel);
-        }
-        catch (Exception)
-        {
-            var errorResponse = new ErrorResponse
+            catch (Exception)
             {
-                status = 500,
-                error_code = "-2",
-                error_message = "Error From Server"
-            };
-            return StatusCode(500, errorResponse);
+                var errorResponse = new ErrorResponse
+                {
+                    status = 500,
+                    error_code = "-2",
+                    error_message = "Error From Server"
+                };
+                return StatusCode(500, errorResponse);
+            }
         }
-    }
 
+    }
 }

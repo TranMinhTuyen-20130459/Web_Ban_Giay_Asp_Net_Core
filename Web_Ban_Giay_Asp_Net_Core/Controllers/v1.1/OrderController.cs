@@ -1,6 +1,8 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
+﻿using Web_Ban_Giay_Asp_Net_Core.Constants.String;
+
+namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
 {
-    [Route("api/order/")]
+    [Route(RouterControllerName.Order_V1_1)]
     [ApiController]
     [ApiExplorerSettings(GroupName = "v1.1")]
     public class OrderController : ControllerBase
