@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Web_Ban_Giay_API_UnitTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43831fae01f2c2beaecbc960d281f0012a26437d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb49e0b3d0925e0c499b629bda64285758e794e0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Web_Ban_Giay_API_UnitTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Web_Ban_Giay_API_UnitTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

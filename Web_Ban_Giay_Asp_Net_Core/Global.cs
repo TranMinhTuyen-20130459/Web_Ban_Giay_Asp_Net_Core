@@ -13,4 +13,5 @@ global using Web_Ban_Giay_Asp_Net_Core.Models.Response;
 global using Web_Ban_Giay_Asp_Net_Core.Repository.Class;
 global using Web_Ban_Giay_Asp_Net_Core.Repository.Interface;
 global using Web_Ban_Giay_Asp_Net_Core.Repository.Util;
+global using Web_Ban_Giay_Asp_Net_Core.SystemExceptions;
 

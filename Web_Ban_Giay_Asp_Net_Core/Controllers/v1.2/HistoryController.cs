@@ -1,6 +1,8 @@
-﻿namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_2
+﻿using Web_Ban_Giay_Asp_Net_Core.Constants.String;
+
+namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_2
 {
-    [Route("api/history/")]
+    [Route(RouterControllerName.History_V1_2)]
     [ApiController]
     [ApiExplorerSettings(GroupName = "v1.2")]
     public class HistoryController : ControllerBase
@@ -15,6 +17,7 @@
         // Trả về chuỗi Json danh sách đơn hàng được mua bởi số điện thoại (có phân trang)
         // [Authorize]
         [HttpGet("lich-su-mua-hang")]
+        [Authorize]
         public IActionResult GetListOrderByPhoneNumber([FromQuery] string phoneNumber, [FromQuery] int page, [FromQuery] int pageSize)
         {
             try

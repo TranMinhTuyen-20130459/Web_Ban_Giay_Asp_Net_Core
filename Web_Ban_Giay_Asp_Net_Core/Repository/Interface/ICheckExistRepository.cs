@@ -8,6 +8,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Repository.Interface
         /*
          * Kiểm tra sự tồn tại của tài khoản người dùng
          */
-        Task<InfoUserDTO> CheckExistOfAccountUser(ValidateUserRequest validateUserRequest);
+        Task<InfoUserDTO?> CheckExistOfAccountUser(ValidateUserRequest validateUserRequest);
     }
 }

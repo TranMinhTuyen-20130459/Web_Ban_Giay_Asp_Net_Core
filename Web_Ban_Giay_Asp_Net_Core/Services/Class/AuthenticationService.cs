@@ -1,5 +1,7 @@
 ﻿using Web_Ban_Giay_Asp_Net_Core.Models.Request;
 using Web_Ban_Giay_Asp_Net_Core.Services.Interface;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
 {
@@ -27,9 +29,31 @@ namespace Web_Ban_Giay_Asp_Net_Core.Services.Class
          *        chuỗi refreshToken
          *      }
          */
-        public Task<ValidateUserResponse> ValidateUser(ValidateUserRequest validateUserRequest)
+        public async Task<ValidateUserResponse> ValidateUser(ValidateUserRequest validateUserRequest)
         {
-            throw new NotImplementedException();
+            var infoUser = await _checkExistRepository.CheckExistOfAccountUser(validateUserRequest);
+
+            if (infoUser == null) throw new NotFoundException("Tài khoản hoặc mật khẩu không đúng");
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, infoUser?.idUser.ToString() ?? ""),
+                new Claim(ClaimTypes.Name, infoUser?.name ?? ""),
+                new Claim(ClaimTypes.Email, infoUser?.email ?? ""),
+                new Claim(ClaimTypes.MobilePhone, infoUser?.phone ?? "")
+            };
+
+            SigningCredentials signingCredentials = _jwtHelper.GetSigningCredentials();
+
+            return new ValidateUserResponse
+            {
+                idUser = infoUser.idUser,
+                name = infoUser.name,
+                email = infoUser.email,
+                phone = infoUser.phone,
+                accessToken = _jwtHelper.CreateToken(signingCredentials, claims),
+                refreshToken = "123"
+            };
         }
     }
 }

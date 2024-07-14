@@ -17,7 +17,6 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_2
         }
 
         [HttpPost("validate/user")]
-        [Authorize]
         public async Task<IActionResult> ValidateUser([FromBody] ValidateUserRequest validateUserRequest)
         {
 
