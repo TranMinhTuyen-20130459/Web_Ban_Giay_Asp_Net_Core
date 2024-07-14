@@ -2,8 +2,7 @@
 {
     public class ErrorResponse
     {
-        public int status { get; set; }
-        public string error_code { get; set; }
-        public string error_message { get; set; }
+        public int statusCode { get; set; }
+        public string errorMessage { get; set; }
     }
 }

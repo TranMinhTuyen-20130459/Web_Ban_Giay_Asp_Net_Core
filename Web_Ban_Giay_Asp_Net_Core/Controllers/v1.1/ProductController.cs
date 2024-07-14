@@ -74,9 +74,8 @@
                 {
                     var errorResponse = new ErrorResponse
                     {
-                        status = 500,
-                        error_code = "-1",
-                        error_message = "Id Product is null"
+                        statusCode = 500,
+                        errorMessage = "Id Product is null"
                     };
 
                     return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống
@@ -89,9 +88,8 @@
 
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
 
                 return StatusCode(500, errorResponse); // không thêm được sản phẩm vào hệ thống do lỗi từ Server
@@ -116,9 +114,8 @@
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
             }
@@ -141,9 +138,8 @@
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
             }
@@ -169,9 +165,8 @@
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
             }

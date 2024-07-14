@@ -2,9 +2,11 @@
 {
     public static class ExceptionStatusCode
     {
-        private static Dictionary<Type, HttpStatusCode> exceptionStatusCode = new()
+        private static readonly Dictionary<Type, HttpStatusCode> exceptionStatusCode = new()
         {
             {typeof(AuthenticationException), HttpStatusCode.Unauthorized},
+            {typeof(NotFoundException), HttpStatusCode.NotFound},
+            {typeof(BadRequestException), HttpStatusCode.BadRequest}
         };
 
         public static HttpStatusCode GetExceptionStatusCode(Exception exception)

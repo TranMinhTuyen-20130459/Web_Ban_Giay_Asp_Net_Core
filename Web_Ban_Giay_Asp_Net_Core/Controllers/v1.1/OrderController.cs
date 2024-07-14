@@ -35,9 +35,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
                 {
                     var errorResponse = new ErrorResponse
                     {
-                        status = 500,
-                        error_code = "-1",
-                        error_message = "So luong san pham dat mua vuot qua so luong san pham dang con trong he thong"
+                        statusCode = 500,
+                        errorMessage = "So luong san pham dat mua vuot qua so luong san pham dang con trong he thong"
                     };
                     return StatusCode(500, errorResponse);
                 }
@@ -49,9 +48,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
             }
@@ -111,9 +109,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
             }

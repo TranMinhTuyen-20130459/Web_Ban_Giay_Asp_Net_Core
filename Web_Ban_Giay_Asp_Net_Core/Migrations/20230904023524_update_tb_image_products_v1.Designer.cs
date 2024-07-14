@@ -158,7 +158,7 @@ namespace Web_Ban_Giay_Asp_Net_Core.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("status")
+                    b.Property<string>("statusCode")
                         .HasColumnType("longtext");
 
                     b.Property<string>("web_browser")

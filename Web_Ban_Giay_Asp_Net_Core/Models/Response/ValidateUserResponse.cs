@@ -1,6 +1,6 @@
 ﻿namespace Web_Ban_Giay_Asp_Net_Core.Models.Response
 {
-    public class LoginUserResponse
+    public class ValidateUserResponse
     {
         public long idUser { get; set; }
         public string name { get; set; }

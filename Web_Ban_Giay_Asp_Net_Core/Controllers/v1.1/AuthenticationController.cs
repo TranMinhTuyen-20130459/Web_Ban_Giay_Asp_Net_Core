@@ -34,9 +34,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
                 {
                     var errorResponse = new ErrorResponse
                     {
-                        status = (int)HttpStatusCode.Unauthorized, // => lỗi 401
-                        error_code = "-1",
-                        error_message = "Email or password is incorrect"
+                        statusCode = (int)HttpStatusCode.Unauthorized, // => lỗi 401
+                        errorMessage = "Email or password is incorrect"
                     };
                     return StatusCode(401, errorResponse);
                 }
@@ -56,9 +55,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
             }
@@ -79,9 +77,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
                 {
                     var errorRespone = new ErrorResponse
                     {
-                        status = (int)HttpStatusCode.Unauthorized,
-                        error_code = "-1",
-                        error_message = "Email or password is incorrect"
+                        statusCode = (int)HttpStatusCode.Unauthorized,
+                        errorMessage = "Email or password is incorrect"
                     };
                     return StatusCode(401, errorRespone);
                 }
@@ -93,9 +90,8 @@ namespace Web_Ban_Giay_Asp_Net_Core.Controllers.v1_1
             {
                 var errorResponse = new ErrorResponse
                 {
-                    status = 500,
-                    error_code = "-2",
-                    error_message = "Error From Server"
+                    statusCode = 500,
+                    errorMessage = "Error From Server"
                 };
                 return StatusCode(500, errorResponse);
             }
